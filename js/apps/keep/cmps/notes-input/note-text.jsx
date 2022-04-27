@@ -2,12 +2,18 @@
 
 export class NoteText extends React.Component {
 
-
+    state = {
+        txt: '',
+        backgroundColor: '',
+        isPinned: false,
+    }
 
 
     render() {
-        return <section>
-            <h1>Hello from note text</h1>
+        const { note } = this.props
+
+        return <section className="note-text">
+            {note && <h1>{note.info.txt}</h1>}
         </section>
     }
 }
