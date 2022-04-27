@@ -1,6 +1,6 @@
 import { AppHeader } from './js/cmps/app-header.jsx'
 import { AppHome } from './js/pages/app-home.jsx'
-import {EmailApp} from './js/pages/app-email.jsx'
+import {EmailApp} from './js/apps/mail/pages/app-email.jsx'
 
 const Router = ReactRouterDOM.HashRouter
 const { Route, Switch } = ReactRouterDOM
