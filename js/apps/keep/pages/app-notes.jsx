@@ -1,5 +1,5 @@
-import { NoteInput } from '../apps/keep/cmps/note-input.jsx'
-import { NotePreview } from '../apps/keep/cmps/note-preview.jsx'
+import { NoteInput } from '../cmps/note-input.jsx'
+import { NotePreview } from '../cmps/note-preview.jsx'
 
 
 export class NotesApp extends React.Component {
