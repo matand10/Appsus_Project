@@ -6,7 +6,7 @@ function _Home() {
         <div className="home-apps">
             <NavLink to="/">💌</NavLink>
             <NavLink to="/">📕</NavLink>
-            <NavLink to="/">📝</NavLink>
+            <NavLink to="/notes">📝</NavLink>
         </div>
     </section>
 }
