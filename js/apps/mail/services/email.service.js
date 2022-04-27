@@ -2,40 +2,61 @@ import { DataMail } from '../../mail/services/ajax.email.js'
 import { utilService } from '../../../services/util.service.js'
 import { storageService } from '../../../services/storage.service.js'
 export const emailService = {
-    query
+    query,
+    getEmailById
 }
 
 const USER_KEY = 'userDB'
+let gEmails = storageService.loadFromStorage(USER_KEY) || []
+
 function query() {
-    let users = storageService.loadFromStorage(USER_KEY) ? storageService.loadFromStorage(USER_KEY) : []
-    console.log(users)
-    if (!users.length) return _creatEmail().then(res => {
-        storageService.saveToStorage(USER_KEY, res)
-        return res
-    })
-    return Promise.resolve(users)
+    if (!gEmails.length) {
+        _createEmails()
+        storageService.saveToStorage(USER_KEY, gEmails)
+    }
+
+    return Promise.resolve(gEmails)
 }
 
-function _creatEmail() {
-    let myEmails = []
-    DataMail.getDataMail()
-        .then(emails => {
-            emails.map(email => {
-                let myEmail = {
-                    id: utilService.makeId(),
-                    fullName: email.name + ' ' + email.lastName,
-                    subject: utilService.makeLorem(10),
-                    body: utilService.makeLorem(50),
-                    isRead: false,
-                    sentAt: new Date().getHours() + ':' + new Date().getMinutes(),
-                    mail: email.email
-                }
-                myEmails.push(myEmail)
-            })
-        })
-    return Promise.resolve(myEmails)
-
+function _createEmails() {
+    _creatEmail('Gordon Ramsey',['Critical','Memories'])
+    _creatEmail('Moshik Rot',['Family','Memories'])
+    _creatEmail('Asaf Granit',['Work','Critical'])
+    _creatEmail('Chaim Cohen'['Family','Friends'])
+    _creatEmail('Aharoni',['Memories','Family'])
+    _creatEmail('Meir Adoni',['Romantic','Family'])
+    _creatEmail('Yosi Shitrit',['Family','Spam'])
 }
+
+function _creatEmail(from,lables) {
+    let email= {
+        id: utilService.makeId(),
+        subject: utilService.makeLorem(10),
+        body: utilService.makeLorem(50),
+        isRead: false,
+        sentAt: new Date().getHours() + ':' + new Date().getMinutes(),
+        mail: 'test@text.com',
+        to: 'Ori',
+        from,
+        status:{
+            inbox,
+            sent,
+            trash,
+            draft
+        },
+        isStared:false,
+        lables
+    }
+    gEmails.push(email)
+}
+
+function getEmailById(emailId) {
+    let emails = storageService.loadFromStorage(USER_KEY)
+    let email = emails.find(email => emailId === email.id)
+    return Promise.resolve(email)
+}
+
+
 // const email = {
 //     id: 'e101',
 //     subject: 'Miss you!',

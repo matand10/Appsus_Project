@@ -1,10 +1,10 @@
 import { EmailList } from '../cmps/email-list.jsx'
 import { emailService } from '../../mail/services/email.service.js'
-
+import {UnReadCount} from '../../mail/cmps/unread-count.jsx'
 
 export class EmailApp extends React.Component {
     state = {
-        users: []
+        emails: []
     }
     componentDidMount() {
         this.loadMails()
@@ -12,16 +12,16 @@ export class EmailApp extends React.Component {
 
     loadMails = () => {
         emailService.query()
-            .then(users => {
-                this.setState({ users })
+            .then(emails => {
+                this.setState({ emails })
             })
     }
 
     render() {
-        const { users } = this.state
-        console.log(users)
+        const { emails } = this.state
         return <section className="email-app">
-            <EmailList users={users} />
+            <EmailList emails={emails} />
+            <UnReadCount emails={emails}/>
         </section>
     }
 }

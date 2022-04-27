@@ -1,7 +1,7 @@
 import { EmailPreview } from '../cmps/email-preview.jsx'
-export function EmailList({ users }) {
+export function EmailList({ emails }) {
 
     return <section className="email-list">
-        {users.map(user => <EmailPreview user={user} key={user.id}/>)}
+        {emails.map(email => <EmailPreview email={email} key={email.id}/>)}
     </section>
 }

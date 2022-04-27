@@ -1,0 +1,6 @@
+.user-mails{
+    display:flex;
+    justify-content: space-between;
+    background-color: aqua;
+    font-size:12px;
+}
