@@ -1,4 +1,4 @@
-import { EmailDetails } from '../../mail/pages/email-detail.jsx'
+import { EmailDetails } from './email-details.jsx'
 import { emailService } from '../../mail/services/email.service.js'
 
 export class EmailPreview extends React.Component {
@@ -19,12 +19,20 @@ export class EmailPreview extends React.Component {
         ev.stopPropagation()
         const { isRead } = this.state
         emailService.getEmailById(emailId)
-            .then(email => {
-                email.isRead = 'true'
-                this.setState({ isRead: !isRead })
-            })
+        .then(email => {
+            emailService.updateKey(email.id,'isRead')
+            this.setState({ isRead: !isRead })
+        })
     }
     
+    onRemove=(ev,emailId,idx)=>{
+        ev.stopPropagation()
+        emailService.getEmailById(emailId)
+        .then(email => {
+            this.props.removeMail(email,idx)
+        })
+    }
+
     render() {
         const { email } = this.props
         const { emailClicked, isClicked, isRead } = this.state
@@ -34,6 +42,7 @@ export class EmailPreview extends React.Component {
                 <h2>{email.from}</h2>
                 <h2>{email.subject}</h2>
                 <button onClick={(event) => this.onClickRead(event,email.id)}>{readImg}</button>
+                <button onClick={(event)=>this.onRemove(event,email.id.idx)}>🚮</button>
                 <h2>{email.sentAt}</h2>
 
             </div>

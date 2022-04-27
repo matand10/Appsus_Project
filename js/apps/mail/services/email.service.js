@@ -3,7 +3,11 @@ import { utilService } from '../../../services/util.service.js'
 import { storageService } from '../../../services/storage.service.js'
 export const emailService = {
     query,
-    getEmailById
+    getEmailById,
+    updateKey,
+    countUnreadMail,
+    addMail,
+    deleteEmail
 }
 
 const USER_KEY = 'userDB'
@@ -19,35 +23,36 @@ function query() {
 }
 
 function _createEmails() {
-    _creatEmail('Gordon Ramsey',['Critical','Memories'])
-    _creatEmail('Moshik Rot',['Family','Memories'])
-    _creatEmail('Asaf Granit',['Work','Critical'])
-    _creatEmail('Chaim Cohen'['Family','Friends'])
-    _creatEmail('Aharoni',['Memories','Family'])
-    _creatEmail('Meir Adoni',['Romantic','Family'])
-    _creatEmail('Yosi Shitrit',['Family','Spam'])
+    _creatEmail('ffdgdfg','fdgffgsdgsdsdsdgsd','Gordon Ramsey', ['Critical', 'Memories'])
+    _creatEmail('ffdgdfg','fdgffgsdgsdsdsdgsd','Moshik Rot', ['Family', 'Memories'])
+    _creatEmail('ffdgdfg','fdgffgsdgsdsdsdgsd','Asaf Granit', ['Work', 'Critical'])
+    _creatEmail('ffdgdfg','fdgffgsdgsdsdsdgsd','Chaim Cohen'['Family', 'Friends'])
+    _creatEmail('ffdgdfg','fdgffgsdgsdsdsdgsd','Aharoni', ['Memories', 'Family'])
+    _creatEmail('ffdgdfg','fdgffgsdgsdsdsdgsd','Meir Adoni', ['Romantic', 'Family'])
+    _creatEmail('ffdgdfg','fdgffgsdgsdsdsdgsd','Yosi Shitrit', ['Family', 'Spam'])
 }
 
-function _creatEmail(from,lables) {
-    let email= {
+function _creatEmail(subject = utilService.makeLorem(10), body = utilService.makeLorem(10), from = 'Muki', lables = ['Spam', 'Friends']) {
+    let email = {
         id: utilService.makeId(),
-        subject: utilService.makeLorem(10),
-        body: utilService.makeLorem(50),
+        subject,
+        body,
         isRead: false,
         sentAt: new Date().getHours() + ':' + new Date().getMinutes(),
         mail: 'test@text.com',
         to: 'Ori',
         from,
-        status:{
-            inbox,
-            sent,
-            trash,
-            draft
-        },
-        isStared:false,
+        // status: {
+        //     inbox,
+        //     sent,
+        //     trash,
+        //     draft
+        // },
+        isStared: false,
         lables
     }
     gEmails.push(email)
+    return email
 }
 
 function getEmailById(emailId) {
@@ -56,12 +61,34 @@ function getEmailById(emailId) {
     return Promise.resolve(email)
 }
 
+function updateKey(emailId, key) {
+    let emails = storageService.loadFromStorage(USER_KEY)
+    let email = emails.find(email => {
+        if (emailId === email.id) {
+            email[key] = true
+            storageService.saveToStorage(USER_KEY, emails)
+        }
+    })
+    return Promise.resolve(email)
+}
 
-// const email = {
-//     id: 'e101',
-//     subject: 'Miss you!',
-//     body: 'Would love to catch up sometimes',
-//     isRead: false,
-//     sentAt : 1551133930594,
-//     to: 'momo@momo.com'
-//     }
+function countUnreadMail() {
+    let emailsUnreadArr = []
+    let emails = storageService.loadFromStorage(USER_KEY)
+    emailsUnreadArr = emails.filter(email => email.isRead === false)
+    return Math.round((emailsUnreadArr.length / emails.length) * 100)
+}
+
+function addMail(valSubject, valBody) {
+    let newMail = _creatEmail(valSubject, valBody)
+    gEmails.push(newMail)
+    storageService.saveToStorage(USER_KEY, gEmails)
+    return Promise.resolve(gEmails)
+}
+
+function deleteEmail(email,idx){
+    let emails = storageService.loadFromStorage(USER_KEY)
+    emails.splice(idx,1)
+    storageService.saveToStorage(USER_KEY, emails)
+    return Promise.resolve(emails)
+}
