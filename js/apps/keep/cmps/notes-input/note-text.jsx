@@ -1,19 +1,13 @@
 
 
-export class NoteText extends React.Component {
-
-    state = {
-        txt: '',
-        backgroundColor: '',
-        isPinned: false,
-    }
+export function NoteText({ note }) {
 
 
-    render() {
-        const { note } = this.props
+    return <section className="note-text">
+        {note && <div>
+            <h1>Note</h1>
+            <h1>{note.info.txt}</h1>
+        </div>}
+    </section>
 
-        return <section className="note-text">
-            {note && <h1>{note.info.txt}</h1>}
-        </section>
-    }
 }

@@ -1,5 +1,8 @@
 import { noteService } from '../../keep/services/note.service.js'
+
 import { NoteText } from '../../keep/cmps/notes-input/note-text.jsx'
+import { NoteImg } from '../../keep/cmps/notes-input/note-img.jsx'
+import { NoteTodos } from '../../keep/cmps/notes-input/note-todos.jsx'
 
 
 
@@ -8,30 +11,47 @@ export class NotePreview extends React.Component {
 
 
     state = {
-        type: '',
+        type: this.props.note.type,
+        isPinned: false,
+        noteStyle: {
+            backgroundColor: 'lightbrown'
+        }
     }
 
-    componentDidMount() {
-        this.loadNote()
+    // componentDidMount() {
+    //     this.loadNote()
+    // }
+
+    // loadNote() {s
+    //     let { note } = this.props
+    //     this.setState({ type: note.type })
+    // }
+
+
+
+    onDeleteNote = (noteId) => {
+        this.props.onDelete(noteId)
     }
 
-    loadNote() {
-        let { note } = this.props
-        this.setState({ type: note.type })
+    setColor = ({ target }) => {
+        this.setState((prevState) => ({ noteStyle: { ...prevState.noteStyle, backgroundColor: target.value } }))
     }
+
 
 
     render() {
+        const { type, noteStyle } = this.state
         const { note } = this.props
-        if (!note) return <h1>Loading...</h1>
+        if (!type) return <h1>Loading...</h1>
 
-        return <section className="note-preview">
-            <DynamicCmp type={note.type} note={note} />
+        return <section className="note-preview" style={noteStyle}>
+            {note && <DynamicCmp type={type} note={note} />}
             <div className="btn-container">
-                <img className="note-btn" src="../../../../assets/imgs/notes-imgs/color.svg" />
-                <img className="note-btn" src="../../../../assets/imgs/notes-imgs/mail.svg" />
                 <img className="note-btn" src="../../../../assets/imgs/notes-imgs/pin.svg" />
-                <img className="note-btn" src="../../../../assets/imgs/notes-imgs/trash.svg" />
+                {/* <img className="note-btn" onClick={() => this.onChangeColor(note.id)} src="../../../../assets/imgs/notes-imgs/color.svg" /> */}
+                <input type="color" onChange={this.setColor} />
+                <img className="note-btn" src="../../../../assets/imgs/notes-imgs/mail.svg" />
+                <img className="note-btn" onClick={() => this.onDeleteNote(note.id)} src="../../../../assets/imgs/notes-imgs/trash.svg" title="Delete" />
             </div>
         </section>
     }
@@ -39,13 +59,12 @@ export class NotePreview extends React.Component {
 
 
 function DynamicCmp({ type, note }) {
-    console.log(type);
     switch (type) {
         case 'note-txt':
             return <NoteText note={note} />
         case 'note-img':
-            return <h1>Img</h1>
+            return <NoteImg note={note} />
         case 'note-todos':
-            return <h1>Todos</h1>
+            return <NoteTodos note={note} />
     }
 }

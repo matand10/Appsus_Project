@@ -10,14 +10,15 @@
 .note-preview {
     background-color: var(--cards-clr-100);
     box-shadow: 0 0 10px var(--primary-clr-500);
-    height: 100px;
+    min-height: 150px;
     width: 200px;
     justify-self: center;
     position: relative;
+    padding: 10px;
 }
 
 .btn-container {
-    width: 15px;
+    width: 14px;
     display: flex;
     gap: 13px;
     position: absolute;
@@ -32,4 +33,30 @@
 
 .note-preview .note-btn:hover {
     opacity: 0.8;
+}
+
+.note-todos {
+    position: relative;
+}
+
+.note-todos h1 {
+    font-size: 0.875em;
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+.todo {
+    font-size: 0.875rem;
+    cursor: pointer;
+}
+
+.todo-btn {
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    right: 0;
+}
+
+.todo.done {
+    text-decoration: line-through;
 }
