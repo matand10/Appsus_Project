@@ -1,27 +1,29 @@
-import { DataMail } from '../../../services/ajax.email.js'
 import {EmailList} from '../cmps/email-list.jsx'
+import {emailService} from '../../mail/services/email.service.js'
 
 
 export class EmailApp extends React.Component{
     state={
-        emails:[]
+        users:[]
     }
     componentDidMount(){
         this.loadMails()
     }
 
     loadMails=()=>{
-        // DataMail.getDataMail()
-        // .then(emails=>{
-        //     this.setState({emails})
-        // })
+        emailService.query()
+        .then(users => {
+            this.setState({users})
+        })
+        
+        
     }
 
     render(){
-        const {emails}=this.state
+        const {users}=this.state
+        console.log(users)
         return <section className="email-app">
-            <h1>Hello email</h1>
-            <EmailList emails={emails}/>
+            <EmailList users={users}/>
         </section>
     }
 }

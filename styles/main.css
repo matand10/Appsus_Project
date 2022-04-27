@@ -16,3 +16,4 @@
 
 /* Components */
 @import './cmps/app-header.css';
+@import './cmps/mail/inbox.css';
