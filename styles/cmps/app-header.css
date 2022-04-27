@@ -1,0 +1,17 @@
+.app-header {
+    background-color: var(--primary-clr-300);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-nav {
+    display: flex;
+}
+
+.header-nav .nav {
+    text-decoration: none;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
