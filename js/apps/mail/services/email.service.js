@@ -4,6 +4,7 @@ import { storageService } from '../../../services/storage.service.js'
 export const emailService = {
     query
 }
+
 const USER_KEY = 'userDB'
 function query() {
     let users = storageService.loadFromStorage(USER_KEY) ? storageService.loadFromStorage(USER_KEY) : []
