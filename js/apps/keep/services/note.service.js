@@ -7,11 +7,12 @@ export const noteService = {
     getById,
     deleteNote,
     removeTask,
-    findPinnedNotes,
-    findUnpinnedNotes,
     pinNote,
-    duplicateNote
+    duplicateNote,
+    markTodo
 }
+
+
 
 const NOTES_KEY = 'notesDB'
 const gNotes = [
@@ -25,7 +26,7 @@ const gNotes = [
     },
     {
         id: utilService.makeId(),
-        type: "note-img",
+        type: 'note-img',
         isPinned: false,
         info: {
             url: "http://some-img/me",
@@ -58,18 +59,6 @@ function query() {
     return Promise.resolve(notes)
 }
 
-function findPinnedNotes() {
-    let notes = _loadFromStorage()
-    let pinnedNotes = notes.filter(note => note.isPinned)
-    return Promise.resolve(pinnedNotes)
-}
-
-function findUnpinnedNotes() {
-    let notes = _loadFromStorage()
-    let unpinnedNotes = notes.filter(note => !note.isPinned)
-    return unpinnedNotes
-}
-
 function removeTask(taskIdx, noteId) {
     let notes = _loadFromStorage()
     let noteIdx = notes.findIndex(note => note.id === noteId)
@@ -77,6 +66,11 @@ function removeTask(taskIdx, noteId) {
     _saveToStorage(notes)
     let todos = notes[noteIdx].info.todos
     return Promise.resolve(todos)
+}
+
+function markTodo(todo) {
+    if (todo.doneAt) todo.doneAt = null
+    else todo.doneAt = Date.now()
 }
 
 function deleteNote(noteId) {
@@ -118,6 +112,14 @@ function pinNote(noteId) {
     const notes = _loadFromStorage()
     const noteIdx = notes.findIndex(note => noteId === note.id)
     notes[noteIdx].isPinned = !notes[noteIdx].isPinned
+    if (!notes[noteIdx].isPinned) {
+        let currNote = notes.splice(noteIdx, 1)
+        currNote.id = utilService.makeId()
+        notes.splice(notes.length, 0, currNote[0])
+    }
+    let currNote = notes.splice(noteIdx, 1)
+    currNote.id = utilService.makeId()
+    notes.splice(0, 0, currNote[0])
     _saveToStorage(notes)
     return Promise.resolve(notes)
 }

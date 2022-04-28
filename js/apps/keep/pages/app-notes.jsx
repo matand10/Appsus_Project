@@ -10,7 +10,7 @@ export class NotesApp extends React.Component {
 
     state = {
         notes: [],
-        unPinnedNotes: []
+        // unPinnedNotes: []
     }
 
 
@@ -23,7 +23,7 @@ export class NotesApp extends React.Component {
         noteService.query()
             .then(notes => {
                 // this.unNotesPinned()
-                this.setState({ notes }, this.unNotesPinned)
+                this.setState({ notes })
             })
     }
 
@@ -41,18 +41,20 @@ export class NotesApp extends React.Component {
     onPin = (noteId) => {
         noteService.pinNote(noteId)
             .then(this.loadNotes)
-
+        // noteService.pinNote(noteId)
+        // .then(this.loadNotes)
     }
 
     unNotesPinned = () => {
-        let unPinnedNotes = noteService.findUnpinnedNotes()
-        this.setState({ unPinnedNotes })
+        // let unPinnedNotes = noteService.findUnpinnedNotes()
+        // this.setState({ unPinnedNotes })
     }
 
     onDuplicate = (noteId) => {
         noteService.duplicateNote(noteId)
             .then(this.loadNotes)
     }
+
 
     render() {
         const { notes, unPinnedNotes } = this.state
@@ -61,9 +63,9 @@ export class NotesApp extends React.Component {
             <NoteInput onCreate={this.onCreate} />
             {notes.length === 0 && <h1>Your list is empty</h1>}
             {notes.length > 0 && <div>
-                <PinnedNotes notes={notes} onDelete={this.onDelete} onPin={this.onPin} onDuplicate={this.onDuplicate} />
+                {/* <PinnedNotes notes={notes} onDelete={this.onDelete} onPin={this.onPin} onDuplicate={this.onDuplicate} /> */}
                 <hr />
-                <NoteList notes={unPinnedNotes} onDelete={this.onDelete} onPin={this.onPin} onDuplicate={this.onDuplicate} />
+                <NoteList notes={notes} onDelete={this.onDelete} onPin={this.onPin} onDuplicate={this.onDuplicate} />
             </div>}
         </section>
     }
