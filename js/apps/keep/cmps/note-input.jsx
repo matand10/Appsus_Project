@@ -19,14 +19,38 @@ export class NoteInput extends React.Component {
     }
 
     handleChange = ({ target }) => {
+        const { info } = this.state.note
         const value = target.value
-        // const field = target.name
-        this.setState((prevState) => ({ note: { ...prevState.note, info: { txt: value } } }))
+        const field = Object.keys(info)
+        this.setState((prevState) => ({ note: { ...prevState.note, info: { [field]: value } } }))
+    }
+
+    setTodos = (note) => {
+        let task = note.info.todos
+        let todos = task.split(',')
+        let tasks = todos.map(todo => ({ txt: todo, dontAt: null }))
+        note.info.todos = tasks
     }
 
     createNote = (ev, note) => {
         ev.preventDefault()
+        this.setTodos(note)
         this.props.onCreate(note)
+    }
+
+    onChangeType = (ev, num) => {
+        ev.stopPropagation()
+        switch (num) {
+            case 1:
+                return this.setState((prevState) => ({ note: { ...prevState.note, type: 'note-txt', info: { txt: '' } } }))
+                break;
+            case 2:
+                return this.setState((prevState) => ({ note: { ...prevState.note, type: 'note-img', info: { url: '' } } }))
+                break;
+            case 3:
+                return this.setState((prevState) => ({ note: { ...prevState.note, type: 'note-todos', info: { todos: '' } } }))
+                break;
+        }
     }
 
 
@@ -36,9 +60,17 @@ export class NoteInput extends React.Component {
 
         return <section className="note-input">
             <form onSubmit={(ev) => this.createNote(ev, note)}>
-                <label htmlFor="create-note"></label>
-                <input type="text" id="create-note" placeholder="What's on your mind?"
-                    onChange={this.handleChange} ref={this.inputRef} />
+                <div className="input-imgs">
+                    <div className="input-btn-container">
+                        <label htmlFor="create-note" className="input-btn">
+                            <img onClick={(ev) => this.onChangeType(ev, 1)} src="../../../../assets/imgs/notes-input-imgs/text.svg" />
+                            <img onClick={(ev) => this.onChangeType(ev, 2)} src="../../../../assets/imgs/notes-input-imgs/image.svg" />
+                            <img onClick={(ev) => this.onChangeType(ev, 3)} src="../../../../assets/imgs/notes-input-imgs/list.svg" />
+                        </label>
+                    </div>
+                    <input type="text" id="create-note" placeholder="What's on your mind?"
+                        onChange={this.handleChange} ref={this.inputRef} />
+                </div>
             </form>
         </section>
     }
