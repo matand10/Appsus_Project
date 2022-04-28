@@ -34,7 +34,7 @@ export class NoteInput extends React.Component {
 
     createNote = (ev, note) => {
         ev.preventDefault()
-        this.setTodos(note)
+        if (note.type === 'note-todos') this.setTodos(note)
         this.props.onCreate(note)
     }
 
@@ -43,13 +43,10 @@ export class NoteInput extends React.Component {
         switch (num) {
             case 1:
                 return this.setState((prevState) => ({ note: { ...prevState.note, type: 'note-txt', info: { txt: '' } } }))
-                break;
             case 2:
                 return this.setState((prevState) => ({ note: { ...prevState.note, type: 'note-img', info: { url: '' } } }))
-                break;
             case 3:
                 return this.setState((prevState) => ({ note: { ...prevState.note, type: 'note-todos', info: { todos: '' } } }))
-                break;
         }
     }
 

@@ -9,7 +9,8 @@ export const noteService = {
     removeTask,
     findPinnedNotes,
     findUnpinnedNotes,
-    pinNote
+    pinNote,
+    duplicateNote
 }
 
 const NOTES_KEY = 'notesDB'
@@ -57,14 +58,16 @@ function query() {
     return Promise.resolve(notes)
 }
 
-function findPinnedNotes(notes) {
+function findPinnedNotes() {
+    let notes = _loadFromStorage()
     let pinnedNotes = notes.filter(note => note.isPinned)
     return Promise.resolve(pinnedNotes)
 }
 
-function findUnpinnedNotes(notes) {
+function findUnpinnedNotes() {
+    let notes = _loadFromStorage()
     let unpinnedNotes = notes.filter(note => !note.isPinned)
-    return Promise.resolve(unpinnedNotes)
+    return unpinnedNotes
 }
 
 function removeTask(taskIdx, noteId) {
@@ -73,14 +76,13 @@ function removeTask(taskIdx, noteId) {
     notes[noteIdx].info.todos.splice(taskIdx, 1)
     _saveToStorage(notes)
     let todos = notes[noteIdx].info.todos
-    console.log(todos);
     return Promise.resolve(todos)
 }
 
 function deleteNote(noteId) {
     let notes = _loadFromStorage()
-    let note = notes.findIndex(note => noteId === note.id)
-    notes.splice(note, 1)
+    let noteIdx = notes.findIndex(note => noteId === note.id)
+    notes.splice(noteIdx, 1)
     _saveToStorage(notes)
     return Promise.resolve(notes)
 }
@@ -102,12 +104,20 @@ function createNewNote(note) {
     }
 }
 
+function duplicateNote(noteId) {
+    const notes = _loadFromStorage()
+    let noteIdx = notes.findIndex(note => note.id === noteId)
+    let newNote = JSON.parse(JSON.stringify(notes[noteIdx]))
+    newNote.id = utilService.makeId()
+    notes.splice(noteIdx, 0, newNote)
+    _saveToStorage(notes)
+    return Promise.resolve(notes)
+}
+
 function pinNote(noteId) {
     const notes = _loadFromStorage()
-    const note = notes.find(note => noteId === note.id)
-    console.log(note);
-    note.isPinned = !note.isPinned
-    console.log(note);
+    const noteIdx = notes.findIndex(note => noteId === note.id)
+    notes[noteIdx].isPinned = !notes[noteIdx].isPinned
     _saveToStorage(notes)
     return Promise.resolve(notes)
 }

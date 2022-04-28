@@ -37,8 +37,12 @@ export class NotePreview extends React.Component {
         this.setState((prevState) => ({ noteStyle: { ...prevState.noteStyle, backgroundColor: target.value } }))
     }
 
-    onPinNote = (note) => {
-        this.props.onPin(note)
+    onPinNote = (noteId) => {
+        this.props.onPin(noteId)
+    }
+
+    onDuplicateNote(noteId) {
+        this.props.onDuplicate(noteId)
     }
 
 
@@ -51,9 +55,10 @@ export class NotePreview extends React.Component {
         return <section className="note-preview" style={noteStyle}>
             {note && <DynamicCmp type={type} note={note} />}
             <div className="btn-container">
+                <img className="note-btn" onClick={() => this.onDuplicateNote(note.id)} src="../../../../assets/imgs/notes-imgs/clone.svg" />
                 <img className="note-btn" onClick={() => this.onPinNote(note.id)} src="../../../../assets/imgs/notes-imgs/pin.svg" />
-                {/* <img className="note-btn" onClick={() => this.onChangeColor(note.id)} src="../../../../assets/imgs/notes-imgs/color.svg" /> */}
-                <input type="color" onChange={this.setColor} />
+                <img className="note-btn" onClick={() => this.onChangeColor(note.id)} src="../../../../assets/imgs/notes-imgs/color.svg" />
+                <input type="color" onChange={this.setColor} className="color-input" />
                 <img className="note-btn" src="../../../../assets/imgs/notes-imgs/mail.svg" />
                 <img className="note-btn" onClick={() => this.onDeleteNote(note.id)} src="../../../../assets/imgs/notes-imgs/trash.svg" title="Delete" />
             </div>

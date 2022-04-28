@@ -7,5 +7,27 @@
 
 .home-apps {
     display: flex;
+    justify-content: center;
     gap: 3.125em;
+}
+
+.home-apps a {
+    background-color: var(--primary-clr-300);
+    border-radius: 10px;
+    height: 150px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color .1s;
+}
+
+.home-apps a:hover {
+    background-color: var(--primary-clr-500);
+}
+
+.home-apps img {
+    width: 75%;
+    height: 75%;
+    object-fit: cover;
 }

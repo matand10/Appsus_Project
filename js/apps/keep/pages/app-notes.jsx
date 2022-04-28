@@ -18,43 +18,52 @@ export class NotesApp extends React.Component {
         this.loadNotes()
     }
 
+
     loadNotes = () => {
         noteService.query()
             .then(notes => {
-                this.unNotesPinned(notes)
-                this.setState({ notes })
+                // this.unNotesPinned()
+                this.setState({ notes }, this.unNotesPinned)
             })
     }
 
+
     onDelete = (noteId) => {
         noteService.deleteNote(noteId)
-            .then(notes => this.setState({ notes }))
+            .then(this.loadNotes)
     }
 
     onCreate = (note) => {
         noteService.createNote(note)
-            .then(notes => this.setState({ notes }))
+            .then(this.loadNotes)
     }
 
     onPin = (noteId) => {
         noteService.pinNote(noteId)
-            .then(notes => this.setState({ notes }))
+            .then(this.loadNotes)
+
     }
 
-    unNotesPinned = (notes) => {
-        noteService.findUnpinnedNotes(notes)
-            .then(notes => (prevState) => this.setState({ ...prevState, unPinnedNotes: notes }))
+    unNotesPinned = () => {
+        let unPinnedNotes = noteService.findUnpinnedNotes()
+        this.setState({ unPinnedNotes })
+    }
+
+    onDuplicate = (noteId) => {
+        noteService.duplicateNote(noteId)
+            .then(this.loadNotes)
     }
 
     render() {
         const { notes, unPinnedNotes } = this.state
 
         return <section>
+            <NoteInput onCreate={this.onCreate} />
+            {notes.length === 0 && <h1>Your list is empty</h1>}
             {notes.length > 0 && <div>
-                <NoteInput onCreate={this.onCreate} />
-                <PinnedNotes notes={notes} onDelete={this.onDelete} />
+                <PinnedNotes notes={notes} onDelete={this.onDelete} onPin={this.onPin} onDuplicate={this.onDuplicate} />
                 <hr />
-                <NoteList notes={notes} onDelete={this.onDelete} onPin={this.onPin} />
+                <NoteList notes={unPinnedNotes} onDelete={this.onDelete} onPin={this.onPin} onDuplicate={this.onDuplicate} />
             </div>}
         </section>
     }
