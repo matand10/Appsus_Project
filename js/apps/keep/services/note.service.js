@@ -50,12 +50,19 @@ const gNotes = [
     }
 ];
 
-function query() {
+function query(filterBy) {
     let notes = _loadFromStorage()
     if (!notes) {
         notes = gNotes
         _saveToStorage(notes)
     }
+
+    if (Object.keys(filterBy).length) {
+        console.log(filterBy);
+        let { subject } = filterBy
+        notes = notes.filter(note => note.type.includes(subject))
+    }
+
     return Promise.resolve(notes)
 }
 
