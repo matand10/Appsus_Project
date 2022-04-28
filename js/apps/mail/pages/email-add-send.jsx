@@ -18,7 +18,7 @@ state={
             })
             .then(()=>{
                 eventBusService.emit('user-msg', {
-                    type: 'success', txt: 'Review removed successfully'
+                    type: 'success', txt: 'Email sended successfully'
             })
         })
     }

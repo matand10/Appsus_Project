@@ -1,6 +1,7 @@
 import { DataMail } from '../../mail/services/ajax.email.js'
 import { utilService } from '../../../services/util.service.js'
 import { storageService } from '../../../services/storage.service.js'
+
 export const emailService = {
     query,
     getEmailById,
@@ -13,23 +14,29 @@ export const emailService = {
 const USER_KEY = 'userDB'
 let gEmails = storageService.loadFromStorage(USER_KEY) || []
 
-function query() {
+function query(filterBy) {
     if (!gEmails.length) {
         _createEmails()
         storageService.saveToStorage(USER_KEY, gEmails)
     }
-
+   
+    if (filterBy) {
+        let { subject } = filterBy
+        gEmails=gEmails.filter(email => {
+            return email.subject.includes(subject)
+        })
+    }
     return Promise.resolve(gEmails)
 }
 
 function _createEmails() {
-    _creatEmail('ffdgdfg','fdgffgsdgsdsdsdgsd','Gordon Ramsey', ['Critical', 'Memories'])
-    _creatEmail('ffdgdfg','fdgffgsdgsdsdsdgsd','Moshik Rot', ['Family', 'Memories'])
-    _creatEmail('ffdgdfg','fdgffgsdgsdsdsdgsd','Asaf Granit', ['Work', 'Critical'])
-    _creatEmail('ffdgdfg','fdgffgsdgsdsdsdgsd','Chaim Cohen'['Family', 'Friends'])
-    _creatEmail('ffdgdfg','fdgffgsdgsdsdsdgsd','Aharoni', ['Memories', 'Family'])
-    _creatEmail('ffdgdfg','fdgffgsdgsdsdsdgsd','Meir Adoni', ['Romantic', 'Family'])
-    _creatEmail('ffdgdfg','fdgffgsdgsdsdsdgsd','Yosi Shitrit', ['Family', 'Spam'])
+    _creatEmail('Hells kitchen', 'fdgffgsdgsdsdsdgsd', 'Gordon Ramsey', ['Critical', 'Memories'])
+    _creatEmail('The chef game', 'fdgffgsdgsdsdsdgsd', 'Moshik Rot', ['Family', 'Memories'])
+    _creatEmail('The chef game', 'fdgffgsdgsdsdsdgsd', 'Asaf Granit', ['Work', 'Critical'])
+    _creatEmail('Olive oil', 'fdgffgsdgsdsdsdgsd', 'Chaim Cohen'['Family', 'Friends'])
+    _creatEmail('Chines food', 'fdgffgsdgsdsdsdgsd', 'Aharoni', ['Memories', 'Family'])
+    _creatEmail('Master chef', 'fdgffgsdgsdsdsdgsd', 'Meir Adoni', ['Romantic', 'Family'])
+    _creatEmail('The chef game', 'fdgffgsdgsdsdsdgsd', 'Yosi Shitrit', ['Family', 'Spam'])
 }
 
 function _creatEmail(subject = utilService.makeLorem(10), body = utilService.makeLorem(10), from = 'Muki', lables = ['Spam', 'Friends']) {
@@ -87,11 +94,11 @@ function addMail(valSubject, valBody) {
     return Promise.resolve(emails)
 }
 
-function deleteEmail(emailId){
+function deleteEmail(emailId) {
     let emails = storageService.loadFromStorage(USER_KEY)
-    let emailIdx=emails.findIndex(email=>emailId===email.id)
+    let emailIdx = emails.findIndex(email => emailId === email.id)
     // console.log(email)
-    emails.splice(emailIdx,1)
+    emails.splice(emailIdx, 1)
     storageService.saveToStorage(USER_KEY, emails)
     return Promise.resolve(emails)
 }

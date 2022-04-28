@@ -15,21 +15,21 @@ export class EmailPreview extends React.Component {
                 this.setState({ emailClicked: email, isClicked: !isClicked })
             })
     }
-    onClickRead = (ev,emailId) => {
+    onClickRead = (ev, emailId) => {
         ev.stopPropagation()
         const { isRead } = this.state
         emailService.getEmailById(emailId)
-        .then(email => {
-            emailService.updateKey(email.id,'isRead')
-            this.setState({ isRead: !isRead })
-        })
+            .then(email => {
+                emailService.updateKey(email.id, 'isRead')
+                this.setState({ isRead: !isRead })
+            })
     }
-    
-    onRemove=(ev,emailId)=>{
+
+    onRemove = (ev, emailId) => {
         ev.stopPropagation()
         // emailService.getEmailById(emailId)
         // .then(email => {
-            this.props.removeMail(emailId)
+        this.props.removeMail(emailId)
         // })
     }
 
@@ -38,14 +38,15 @@ export class EmailPreview extends React.Component {
         const { emailClicked, isClicked, isRead } = this.state
         let readImg = isRead ? 'open' : 'close'
         return <section className="email-preview" >
-            <div className="user-mails" onClick={() => this.onClickEmail(email.id)}>
-                <h2>{email.from}</h2>
-                <h2>{email.subject}</h2>
-                <img src={`assets/imgs/notes-imgs/envelope-${readImg}.svg`} onClick={(event) => this.onClickRead(event,email.id)}/>
-                <img src="assets/imgs/notes-imgs/trash.svg" onClick={(event)=>this.onRemove(event,email.id)}/>
-                <h2>{email.sentAt}</h2>
+            <tr className="user-mails" onClick={() => this.onClickEmail(email.id)}>
 
-            </div>
+                <td>{email.from}</td>
+                <td>{email.subject}</td>
+                <td><img src={`assets/imgs/notes-imgs/envelope-${readImg}.svg`} onClick={(event) => this.onClickRead(event, email.id)} /></td>
+                <td><img src="assets/imgs/notes-imgs/trash.svg" onClick={(event) => this.onRemove(event, email.id)} /></td>
+                <td>{email.sentAt}</td>
+            </tr>
+
             {isClicked && <EmailDetails email={emailClicked} />}
         </section>
 

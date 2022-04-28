@@ -13,7 +13,6 @@ export function App() {
     return <Router>
         <AppHeader />
         <hr />
-
         <section className="app">
             <Switch>
                 <Route path="/newEmail" component={AddSendEmail}></Route>
