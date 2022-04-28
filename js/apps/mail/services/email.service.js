@@ -80,15 +80,18 @@ function countUnreadMail() {
 }
 
 function addMail(valSubject, valBody) {
+    let emails = storageService.loadFromStorage(USER_KEY)
     let newMail = _creatEmail(valSubject, valBody)
-    gEmails.push(newMail)
-    storageService.saveToStorage(USER_KEY, gEmails)
-    return Promise.resolve(gEmails)
+    emails.push(newMail)
+    storageService.saveToStorage(USER_KEY, emails)
+    return Promise.resolve(emails)
 }
 
-function deleteEmail(email,idx){
+function deleteEmail(emailId){
     let emails = storageService.loadFromStorage(USER_KEY)
-    emails.splice(idx,1)
+    let emailIdx=emails.findIndex(email=>emailId===email.id)
+    // console.log(email)
+    emails.splice(emailIdx,1)
     storageService.saveToStorage(USER_KEY, emails)
     return Promise.resolve(emails)
 }

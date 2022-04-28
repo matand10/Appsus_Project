@@ -2,15 +2,25 @@ import { eventBusService } from '../../../services/event-bus-service.js'
 import { emailService } from '../../mail/services/email.service.js'
 const { Link } = ReactRouterDOM
 export class AddSendEmail extends React.Component {
-
+state={
+    newEmails:''
+}
     onSend = (ev) => {
         ev.preventDefault()
         let valSubject = ev.target[1].value
         let valBody = ev.target[2].value
         emailService.addMail(valSubject, valBody)
             .then(newEmails => {
-                eventBusService.emit('new-emails', newEmails)
+                console.log(newEmails)
+                this.setState((prevState)=>({...prevState,newEmails}))
+                // eventBusService.emit('new-emails', newEmails)
+                this.props.history.push('/email')
             })
+            .then(()=>{
+                eventBusService.emit('user-msg', {
+                    type: 'success', txt: 'Review removed successfully'
+            })
+        })
     }
 
     render() {
@@ -25,9 +35,9 @@ export class AddSendEmail extends React.Component {
                 <label>Text:
                     <input type="textarea" name="body" />
                 </label>
-                <Link to="/email"><button>Send</button></Link>
-                <Link to="/email"><button>X</button></Link>
+                <button>Send</button>
             </form>
+                <Link to="/email"><button>X</button></Link>
         </section>
     }
 }

@@ -3,6 +3,7 @@ import { AppHome } from './js/pages/app-home.jsx'
 import { EmailApp } from './js/apps/mail/pages/app-email.jsx'
 import { NotesApp } from './js/apps/keep/pages/app-notes.jsx'
 import {AddSendEmail} from './js/apps/mail/pages/email-add-send.jsx'
+import {UserMsg} from './js/apps/mail/cmps/user-msg.jsx'
 
 const Router = ReactRouterDOM.HashRouter
 const { Route, Switch } = ReactRouterDOM
@@ -22,7 +23,7 @@ export function App() {
             </Switch>
         </section>
 
-        {/* <UserMsg /> */}
+        <UserMsg />
     </Router>
 
 }
