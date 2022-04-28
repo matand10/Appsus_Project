@@ -25,24 +25,24 @@ export class EmailPreview extends React.Component {
         })
     }
     
-    onRemove=(ev,emailId,idx)=>{
+    onRemove=(ev,emailId)=>{
         ev.stopPropagation()
-        emailService.getEmailById(emailId)
-        .then(email => {
-            this.props.removeMail(email,idx)
-        })
+        // emailService.getEmailById(emailId)
+        // .then(email => {
+            this.props.removeMail(emailId)
+        // })
     }
 
     render() {
         const { email } = this.props
         const { emailClicked, isClicked, isRead } = this.state
-        let readImg = isRead ? '📰' : '🗞️'
+        let readImg = isRead ? 'open' : 'close'
         return <section className="email-preview" >
             <div className="user-mails" onClick={() => this.onClickEmail(email.id)}>
                 <h2>{email.from}</h2>
                 <h2>{email.subject}</h2>
-                <button onClick={(event) => this.onClickRead(event,email.id)}>{readImg}</button>
-                <button onClick={(event)=>this.onRemove(event,email.id.idx)}>🚮</button>
+                <img src={`assets/imgs/notes-imgs/envelope-${readImg}.svg`} onClick={(event) => this.onClickRead(event,email.id)}/>
+                <img src="assets/imgs/notes-imgs/trash.svg" onClick={(event)=>this.onRemove(event,email.id)}/>
                 <h2>{email.sentAt}</h2>
 
             </div>
