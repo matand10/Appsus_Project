@@ -2,7 +2,7 @@ import { EmailList } from '../cmps/email-list.jsx'
 import { emailService } from '../../mail/services/email.service.js'
 import { UnReadCount } from '../../mail/cmps/unread-count.jsx'
 import { eventBusService } from '../../../services/event-bus-service.js'
-
+import {SortEmail} from '../../mail/cmps/email-sort.jsx'
 
 const { Link } = ReactRouterDOM
 
@@ -45,7 +45,6 @@ export class EmailApp extends React.Component {
 
     setFilter = () => {
         this.removeEvent = eventBusService.on('filter-emails', (filterBy) => {
-            
             this.setState({ filterBy })
             this.loadMails()
         })
@@ -56,6 +55,7 @@ export class EmailApp extends React.Component {
         if (!emails.length) return <h1>No emails</h1>
         return <section className="email-app">
             <Link to='/newEmail'><button className="new-mail"><img src="assets/imgs/notes-imgs/icon-google.webp" /> Compose</button></Link>
+            <SortEmail/>
             <div className="email-board">
                 <EmailList emails={emails} removeMail={this.removeMail} />
                 <nav className="bar">
