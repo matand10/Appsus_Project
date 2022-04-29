@@ -5,7 +5,7 @@
 
 /* Basics */
 @import './basics/base.css';
-@import './basics/helpers.css';
+/* @import './basics/helpers.css'; */
 @import './basics/main-layout.css';
 
 
@@ -21,3 +21,4 @@
 @import './cmps/email-app/inbox-mail.css';
 @import './cmps/email-app/inbox-mail.css';
 @import './cmps/email-app/user-msg.css';
+@import './cmps/email-app/send-mail.css';

@@ -3,7 +3,8 @@ import { emailService } from '../../mail/services/email.service.js'
 const { Link } = ReactRouterDOM
 export class AddSendEmail extends React.Component {
 state={
-    newEmails:''
+    newEmails:'',
+    isSent:false
 }
     onSend = (ev) => {
         ev.preventDefault()
@@ -25,7 +26,9 @@ state={
 
     render() {
         return <section className="send-mail">
-            <form onSubmit={(event) => this.onSend(event)}>
+                <Link to="/email"><button>X</button></Link>
+                <header>New message:</header>
+            <form className="send" onSubmit={(event) => this.onSend(event)}>
                 <label>To:
                     <input type="text" name="mailTo" />
                 </label>
@@ -35,9 +38,8 @@ state={
                 <label>Text:
                     <input type="textarea" name="body" />
                 </label>
-                <button>Send</button>
+                <button><img src="assets/imgs/notes-imgs/send.svg"/></button>
             </form>
-                <Link to="/email"><button>X</button></Link>
         </section>
     }
 }

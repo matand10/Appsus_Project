@@ -3,7 +3,9 @@ export function EmailList({ emails, removeMail }) {
 
     return <section className="email-list">
         <table>
-            {emails.map(email => <EmailPreview email={email} key={email.id} removeMail={removeMail} />)}
+            <tbody>
+                {emails.map(email => <EmailPreview email={email} key={email.id} removeMail={removeMail} />)}
+            </tbody>
         </table>
     </section>
 }

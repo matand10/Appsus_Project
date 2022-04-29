@@ -2,20 +2,20 @@ import { EmailList } from '../cmps/email-list.jsx'
 import { emailService } from '../../mail/services/email.service.js'
 import { UnReadCount } from '../../mail/cmps/unread-count.jsx'
 import { eventBusService } from '../../../services/event-bus-service.js'
-import {SortEmail} from '../../mail/cmps/email-sort.jsx'
+import { SortEmail } from '../../mail/cmps/email-sort.jsx'
 
 const { Link } = ReactRouterDOM
 
 export class EmailApp extends React.Component {
     state = {
         emails: [],
-        filterBy: null
+        filterBy: {}
     }
 
     removeEvent;
 
     componentDidMount() {
-        this.setFilter ()
+        this.setFilter()
         this.loadMails()
     }
 
@@ -24,7 +24,7 @@ export class EmailApp extends React.Component {
     }
 
     loadMails = () => {
-        emailService.query()
+        emailService.query(this.state.filterBy)
             .then(emails => {
                 this.setState({ emails })
             })
@@ -45,21 +45,30 @@ export class EmailApp extends React.Component {
 
     setFilter = () => {
         this.removeEvent = eventBusService.on('filter-emails', (filterBy) => {
-            this.setState({ filterBy })
-            this.loadMails()
+            this.setState({ emails:filterBy })
         })
     }
-   
+
+    setSort = (sortBy) => {
+        console.log(sortBy)
+        emailService.getSort(sortBy)
+        .then(sortEmails=>{
+            console.log(sortEmails)
+            this.setState({emails:sortEmails})
+        })
+    }
+
     render() {
         const { emails } = this.state
         if (!emails.length) return <h1>No emails</h1>
         return <section className="email-app">
             <Link to='/newEmail'><button className="new-mail"><img src="assets/imgs/notes-imgs/icon-google.webp" /> Compose</button></Link>
-            <SortEmail/>
+            <SortEmail setSort={this.setSort} />
             <div className="email-board">
                 <EmailList emails={emails} removeMail={this.removeMail} />
                 <nav className="bar">
                     <Link to="/email">Inbok</Link>
+                    <Link to="/sent">Sent</Link>
                     <UnReadCount />
                 </nav>
             </div>

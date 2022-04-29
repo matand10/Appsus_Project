@@ -1,6 +1,7 @@
 import { DataMail } from '../../mail/services/ajax.email.js'
 import { utilService } from '../../../services/util.service.js'
 import { storageService } from '../../../services/storage.service.js'
+import { SortEmail } from '../cmps/email-sort.jsx'
 
 export const emailService = {
     query,
@@ -8,28 +9,50 @@ export const emailService = {
     updateKey,
     countUnreadMail,
     addMail,
-    deleteEmail
+    deleteEmail,
+    getSort
 }
 
 const USER_KEY = 'userDB'
-let gEmails = storageService.loadFromStorage(USER_KEY) || []
+let gEmails = storageService.loadFromStorage(USER_KEY)
 
 function query(filterBy) {
-    if (!gEmails.length) {
+    gEmails = storageService.loadFromStorage(USER_KEY) || []
+    console.log(gEmails)
+    if (!gEmails) {
         _createEmails()
         storageService.saveToStorage(USER_KEY, gEmails)
     }
-   
-    if (filterBy) {
+
+    if (Object.keys(filterBy).length) {
         let { subject } = filterBy
-        gEmails=gEmails.filter(email => {
-            return email.subject.includes(subject)
+        gEmails = gEmails.filter(email => {
+            return email.subject.toLowerCase().includes(subject.toLowerCase())
         })
     }
+
+    return Promise.resolve(gEmails)
+}
+
+function getSort(sortBy) {
+    gEmails = storageService.loadFromStorage(USER_KEY)
+    switch (sortBy) {
+        case 'date':
+            gEmails = gEmails.sort((a, b) => b.sentAt - a.sentAt)
+            break;
+        case 'title':
+            gEmails = gEmails.sort((a, b) => {
+                if (a.subject.toLowerCase() < b.subject.toLowerCase()) return -1;
+                if (a.subject.toLowerCase() > b.subject.toLowerCase()) return 1;
+                return 0;
+            })
+    }
+    storageService.saveToStorage(USER_KEY, gEmails)
     return Promise.resolve(gEmails)
 }
 
 function _createEmails() {
+    gEmails = []
     _creatEmail('Hells kitchen', 'fdgffgsdgsdsdsdgsd', 'Gordon Ramsey', ['Critical', 'Memories'])
     _creatEmail('The chef game', 'fdgffgsdgsdsdsdgsd', 'Moshik Rot', ['Family', 'Memories'])
     _creatEmail('The chef game', 'fdgffgsdgsdsdsdgsd', 'Asaf Granit', ['Work', 'Critical'])
@@ -45,7 +68,7 @@ function _creatEmail(subject = utilService.makeLorem(10), body = utilService.mak
         subject,
         body,
         isRead: false,
-        sentAt: new Date().getHours() + ':' + new Date().getMinutes(),
+        sentAt: Date.now(),
         mail: 'test@text.com',
         to: 'Ori',
         from,
@@ -56,6 +79,7 @@ function _creatEmail(subject = utilService.makeLorem(10), body = utilService.mak
         //     draft
         // },
         isStared: false,
+        isSent:false,
         lables
     }
     gEmails.push(email)
@@ -89,6 +113,7 @@ function countUnreadMail() {
 function addMail(valSubject, valBody) {
     let emails = storageService.loadFromStorage(USER_KEY)
     let newMail = _creatEmail(valSubject, valBody)
+    console.log('new',newMail)
     emails.push(newMail)
     storageService.saveToStorage(USER_KEY, emails)
     return Promise.resolve(emails)

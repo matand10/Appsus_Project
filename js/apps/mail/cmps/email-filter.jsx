@@ -17,7 +17,6 @@ export class FilterItem extends React.Component {
         ev.preventDefault()
         emailService.query(this.state.filterBy)
             .then(filterEmail => {
-                console.log(filterEmail)
                 eventBusService.emit('filter-emails', filterEmail)
             })
     }
