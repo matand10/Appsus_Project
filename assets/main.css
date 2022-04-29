@@ -17,6 +17,9 @@
 /* Components */
 @import './cmps/app-header.css';
 @import './cmps/note-app/note-preview.css';
+@import './cmps/note-app/note-text.css';
+@import './cmps/note-app/note-todos.css';
+@import './cmps/note-app/note-input.css';
 @import './cmps/note-app/pinned-list.css';
 @import './cmps/email-app/inbox-mail.css';
 @import './cmps/email-app/inbox-mail.css';

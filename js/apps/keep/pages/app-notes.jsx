@@ -1,6 +1,6 @@
 import { noteService } from '../services/note.service.js'
 
-
+import { eventBusService } from '../../../services/event-bus-service.js'
 import { PinnedNotes } from '../cmps/notes-input/note-pin.jsx'
 import { NoteInput } from '../cmps/note-input.jsx'
 import { NoteList } from '../cmps/note-list.jsx'
@@ -10,23 +10,33 @@ export class NotesApp extends React.Component {
 
     state = {
         notes: [],
-        // unPinnedNotes: []
+        filterBy: {}
     }
-
+    removeEvent
 
     componentDidMount() {
+        this.setFilter()
         this.loadNotes()
     }
 
 
     loadNotes = () => {
-        noteService.query()
+        noteService.query(this.state.filterBy)
             .then(notes => {
-                // this.unNotesPinned()
                 this.setState({ notes })
+                eventBusService.on('filter-notes', notes)
             })
     }
 
+    setFilter = () => {
+        this.removeEvent = eventBusService.on('filter-notes', (filterBy) => {
+            this.setState({ notes: filterBy })
+        })
+    }
+
+    componentWillUnmount() {
+        this.removeEvent()
+    }
 
     onDelete = (noteId) => {
         noteService.deleteNote(noteId)
@@ -41,13 +51,6 @@ export class NotesApp extends React.Component {
     onPin = (noteId) => {
         noteService.pinNote(noteId)
             .then(this.loadNotes)
-        // noteService.pinNote(noteId)
-        // .then(this.loadNotes)
-    }
-
-    unNotesPinned = () => {
-        // let unPinnedNotes = noteService.findUnpinnedNotes()
-        // this.setState({ unPinnedNotes })
     }
 
     onDuplicate = (noteId) => {
@@ -57,14 +60,14 @@ export class NotesApp extends React.Component {
 
 
     render() {
-        const { notes, unPinnedNotes } = this.state
+        const { notes } = this.state
 
         return <section>
             <NoteInput onCreate={this.onCreate} />
             {notes.length === 0 && <h1>Your list is empty</h1>}
-            {notes.length > 0 && <div>
+            <hr />
+            {notes.length > 0 && <div >
                 {/* <PinnedNotes notes={notes} onDelete={this.onDelete} onPin={this.onPin} onDuplicate={this.onDuplicate} /> */}
-                <hr />
                 <NoteList notes={notes} onDelete={this.onDelete} onPin={this.onPin} onDuplicate={this.onDuplicate} />
             </div>}
         </section>
