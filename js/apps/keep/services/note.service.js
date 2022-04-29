@@ -13,7 +13,8 @@ export const noteService = {
     saveColor,
     setNotePosition,
     getYouTubeLink,
-    editText
+    editText,
+    createNotedEmail
 }
 
 
@@ -76,6 +77,10 @@ function query(filterBy) {
     }
 
     return Promise.resolve(notes)
+}
+
+function createNotedEmail(email) {
+    console.log(email);
 }
 
 function setNotePosition(fromNoteId, toNoteId) {
