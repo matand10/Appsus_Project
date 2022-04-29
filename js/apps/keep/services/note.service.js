@@ -80,7 +80,11 @@ function query(filterBy) {
 }
 
 function createNotedEmail(email) {
-    console.log(email);
+    let notes = _loadFromStorage()
+    let note = _setEmailToNote(email)
+    notes.push(note)
+    _saveToStorage(notes)
+    return Promise.resolve(notes)
 }
 
 function setNotePosition(fromNoteId, toNoteId) {
@@ -160,6 +164,19 @@ function createNewNote(note) {
         info: note.info,
         style: {
             backgroundColor: "lightbrown"
+        }
+    }
+}
+
+function _setEmailToNote(email) {
+    return {
+        id: email.id,
+        title: email.subject,
+        type: 'type-txt',
+        isPinned: false,
+        info: { txt: email.body },
+        style: {
+            backgroundColor: "pink"
         }
     }
 }
