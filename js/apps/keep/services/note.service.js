@@ -12,7 +12,8 @@ export const noteService = {
     markTodo,
     saveColor,
     setNotePosition,
-    getYouTubeLink
+    getYouTubeLink,
+    editText
 }
 
 
@@ -21,6 +22,7 @@ const NOTES_KEY = 'notesDB'
 const gNotes = [
     {
         id: utilService.makeId(),
+        title: 'My time',
         type: "note-txt",
         isPinned: true,
         info: {
@@ -32,6 +34,7 @@ const gNotes = [
     },
     {
         id: utilService.makeId(),
+        title: 'My time',
         type: 'note-img',
         isPinned: false,
         info: {
@@ -44,6 +47,7 @@ const gNotes = [
     },
     {
         id: utilService.makeId(),
+        title: 'My time',
         type: "note-todos",
         isPinned: false,
         info: {
@@ -92,6 +96,25 @@ function saveColor(noteId, color) {
     _saveToStorage(notes)
 }
 
+function editText(value, noteId) {
+    let notes = _loadFromStorage()
+    let note = notes.find(note => note.id === noteId)
+    console.log(note);
+    switch (note.type) {
+        case 'note-img':
+            note.info.title = value
+            break;
+        case 'note-txt':
+            note.info.txt = value
+            break;
+        case 'note-todos':
+            note.info.label = value
+            break;
+    }
+    _saveToStorage(notes)
+    return Promise.resolve(notes)
+}
+
 
 function removeTask(taskIdx, noteId) {
     let notes = _loadFromStorage()
@@ -126,6 +149,7 @@ function createNote(note) {
 function createNewNote(note) {
     return {
         id: utilService.makeId(),
+        title: note.title,
         type: note.type,
         isPinned: false,
         info: note.info,
@@ -168,7 +192,7 @@ function getById(noteId) {
 }
 
 function getYouTubeLink(input) {
-    let newInput = input.replace('watch?v=', 'embed/')
+    let newInput = input.replace('watch?v=', 'embed?/')
     return newInput
 }
 

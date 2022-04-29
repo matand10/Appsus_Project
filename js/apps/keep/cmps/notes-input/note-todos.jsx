@@ -29,14 +29,19 @@ export class NoteTodos extends React.Component {
         this.setState({ todos })
     }
 
+    onChangeText = (ev, note) => {
+        let value = ev.target.innerText
+        this.props.changeText(value, note)
+    }
+
     render() {
         const { note } = this.props
         const { todos } = this.state
         const { label } = note.info
 
-        return <section className="note-todos" >
-            <h1 suppressContentEditableWarning="true"
-                contentEditable="true">{label}</h1>
+        return <section className="note-todos">
+            <h1 onBlur={(ev) => this.onChangeText(ev, note)} suppressContentEditableWarning="true"
+                contentEditable="true">{note.title}</h1>
             <ul className={`todos-list`}>
                 {todos.map((todo, idx) => <li key={todo.txt} className={todo.doneAt ? 'mark' : ''} onClick={() => this.onMarkTodo(todo)}>
                     {todo.txt}

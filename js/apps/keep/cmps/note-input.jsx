@@ -5,6 +5,7 @@ export class NoteInput extends React.Component {
 
     state = {
         note: {
+            title: '',
             info: { txt: '' },
             isPinned: false,
             type: 'note-txt'
@@ -17,6 +18,11 @@ export class NoteInput extends React.Component {
 
     componentDidMount() {
         this.inputRef.current.focus()
+    }
+
+    handleTitleChange = ({ target }) => {
+        const value = target.value
+        this.setState((prevState) => ({ note: { ...prevState.note, title: value } }))
     }
 
     handleChange = ({ target }) => {
@@ -68,14 +74,29 @@ export class NoteInput extends React.Component {
         }
     }
 
+    get onUserGuide() {
+        const { selectedType } = this.state
+        switch (selectedType) {
+            case 'note-txt':
+                return 'Type your text here..'
+            case 'note-img':
+                return 'Insert an image URL..'
+            case 'note-todos':
+                return 'Write your todos seperated by comma..'
+            case 'note-video':
+                return 'Insert a video URL..'
+        }
+    }
 
 
     render() {
         const { note, selectedType } = this.state
         let isSelected = this.onSelectedType
-
+        let placeHolder = this.onUserGuide
 
         return <section className="note-input">
+            <input type="text" placeholder="Give me a title.." className="title-input"
+                onChange={this.handleTitleChange} ref={this.inputRef} />
             <form onSubmit={(ev) => this.createNote(ev, note)}>
                 <div className="input-imgs">
                     <div className="input-btn-container">
@@ -86,10 +107,11 @@ export class NoteInput extends React.Component {
                             <img className={isSelected = selectedType === 'note-video' ? 'video' : ''} onClick={(ev) => this.onChangeType(ev, 4)} src="../../../../assets/imgs/notes-input-imgs/video.svg" />
                         </label>
                     </div>
-                    <input type="text" id="create-note" placeholder="What's on your mind?"
-                        onChange={this.handleChange} ref={this.inputRef} />
+                    <input type="text" id="create-note" placeholder={placeHolder}
+                        onChange={this.handleChange} />
                 </div>
             </form>
+
         </section>
     }
 }

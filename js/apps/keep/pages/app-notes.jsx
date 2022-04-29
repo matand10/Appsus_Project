@@ -63,6 +63,11 @@ export class NotesApp extends React.Component {
             .then(this.loadNotes)
     }
 
+    saveText = (value, note) => {
+        noteService.editText(value, note.id)
+            .then(this.loadNotes)
+    }
+
 
     render() {
         const { notes } = this.state
@@ -73,7 +78,7 @@ export class NotesApp extends React.Component {
             <hr />
             {notes.length > 0 && <div>
                 {/* <PinnedNotes notes={notes} onDelete={this.onDelete} onPin={this.onPin} onDuplicate={this.onDuplicate} /> */}
-                <NoteList notes={notes} onDragNote={this.onDragNote} onDelete={this.onDelete} onPin={this.onPin} onDuplicate={this.onDuplicate} />
+                <NoteList saveText={this.saveText} notes={notes} onDragNote={this.onDragNote} onDelete={this.onDelete} onPin={this.onPin} onDuplicate={this.onDuplicate} />
             </div>}
         </section>
     }

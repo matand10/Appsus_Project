@@ -56,8 +56,7 @@ export class NotePreview extends React.Component {
     }
 
     changeNoteText = (value, note) => {
-
-        console.log(value, note);
+        this.props.saveText(value, note)
     }
 
 
@@ -89,7 +88,7 @@ function DynamicCmp({ type, note, changeText }) {
         case 'note-img':
             return <NoteImg note={note} changeText={changeText} />
         case 'note-todos':
-            return <NoteTodos note={note} />
+            return <NoteTodos note={note} changeText={changeText} />
         case 'note-video':
             return <NoteVideo note={note} />
     }
