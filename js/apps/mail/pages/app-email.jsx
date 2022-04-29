@@ -3,6 +3,7 @@ import { emailService } from '../../mail/services/email.service.js'
 import { UnReadCount } from '../../mail/cmps/unread-count.jsx'
 import { eventBusService } from '../../../services/event-bus-service.js'
 import { SortEmail } from '../../mail/cmps/email-sort.jsx'
+import {noteService} from '../../keep/services/note.service.js'
 
 const { Link } = ReactRouterDOM
 
@@ -45,17 +46,22 @@ export class EmailApp extends React.Component {
 
     setFilter = () => {
         this.removeEvent = eventBusService.on('filter-emails', (filterBy) => {
-            this.setState({ emails:filterBy })
+            this.setState({ emails: filterBy })
         })
     }
 
     setSort = (sortBy) => {
         console.log(sortBy)
         emailService.getSort(sortBy)
-        .then(sortEmails=>{
-            console.log(sortEmails)
-            this.setState({emails:sortEmails})
-        })
+            .then(sortEmails => {
+                console.log(sortEmails)
+                this.setState({ emails: sortEmails })
+            })
+    }
+
+    getEmailToNote = (email) => {
+        noteService.createNotedEmail(email)
+this.props.history.push('/notes')
     }
 
     render() {
@@ -65,10 +71,10 @@ export class EmailApp extends React.Component {
             <Link to='/newEmail'><button className="new-mail"><img src="assets/imgs/notes-imgs/icon-google.webp" /> Compose</button></Link>
             <SortEmail setSort={this.setSort} />
             <div className="email-board">
-                <EmailList emails={emails} removeMail={this.removeMail} />
+                <EmailList emails={emails} removeMail={this.removeMail} getEmailToNote={this.getEmailToNote}/>
                 <nav className="bar">
-                    <Link to="/email"><img src="assets/imgs/notes-imgs/inbox.svg"/> Inbok</Link>
-                    <Link to="/sent"><img src="assets/imgs/notes-imgs/sent-box.svg"/> Sent</Link>
+                    <Link to="/email"><img src="assets/imgs/notes-imgs/inbox.svg" /> Inbok</Link>
+                    <Link to="/sent"><img src="assets/imgs/notes-imgs/sent-box.svg" /> Sent</Link>
                     <UnReadCount />
                 </nav>
             </div>
