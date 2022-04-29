@@ -31,22 +31,20 @@ export class NoteTodos extends React.Component {
 
     render() {
         const { note } = this.props
-        const { label } = note.info
         const { todos } = this.state
+        const { label } = note.info
 
         return <section className="note-todos" >
             <h1 suppressContentEditableWarning="true"
                 contentEditable="true">{label}</h1>
-            {todos.map((todo, idx) => <ul key={todo.txt} className={`todos-list`}>
-                <li className={todo.doneAt ? 'mark' : ''} onClick={() => this.onMarkTodo(todo)}>{todo.txt}
+            <ul className={`todos-list`}>
+                {todos.map((todo, idx) => <li key={todo.txt} className={todo.doneAt ? 'mark' : ''} onClick={() => this.onMarkTodo(todo)}>
+                    {todo.txt}
                     <button onClick={() => this.onDeleteTask(idx, todos)} className="todo-btn" >❌</button>
-                </li>
-            </ul>)}
+                </li>)}
+            </ul>
             {/* <button onClick={() => this.onEnterTask(todos)}>+</button> */}
         </section>
 
     }
-
-
-
 }

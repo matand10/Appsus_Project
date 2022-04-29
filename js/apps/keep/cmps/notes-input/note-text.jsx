@@ -3,6 +3,8 @@
 export function NoteText({ note }) {
 
 
+
+
     return <section className="note-text">
         {note && <div className="note-text-container" suppressContentEditableWarning="true"
             contentEditable="true">

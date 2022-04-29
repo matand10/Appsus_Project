@@ -58,6 +58,11 @@ export class NotesApp extends React.Component {
             .then(this.loadNotes)
     }
 
+    onDragNote = (transferedNoteId, noteDestinationId) => {
+        noteService.setNotePosition(transferedNoteId, noteDestinationId)
+            .then(this.loadNotes)
+    }
+
 
     render() {
         const { notes } = this.state
@@ -66,9 +71,9 @@ export class NotesApp extends React.Component {
             <NoteInput onCreate={this.onCreate} />
             {notes.length === 0 && <h1>Your list is empty</h1>}
             <hr />
-            {notes.length > 0 && <div >
+            {notes.length > 0 && <div>
                 {/* <PinnedNotes notes={notes} onDelete={this.onDelete} onPin={this.onPin} onDuplicate={this.onDuplicate} /> */}
-                <NoteList notes={notes} onDelete={this.onDelete} onPin={this.onPin} onDuplicate={this.onDuplicate} />
+                <NoteList notes={notes} onDragNote={this.onDragNote} onDelete={this.onDelete} onPin={this.onPin} onDuplicate={this.onDuplicate} />
             </div>}
         </section>
     }
