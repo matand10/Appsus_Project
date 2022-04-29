@@ -9,7 +9,8 @@ export const noteService = {
     removeTask,
     pinNote,
     duplicateNote,
-    markTodo
+    markTodo,
+    saveColor
 }
 
 
@@ -22,6 +23,9 @@ const gNotes = [
         isPinned: true,
         info: {
             txt: "Fullstack Me Baby!"
+        },
+        style: {
+            backgroundColor: "lightbrown"
         }
     },
     {
@@ -29,11 +33,11 @@ const gNotes = [
         type: 'note-img',
         isPinned: false,
         info: {
-            url: "http://some-img/me",
+            url: "https://images.unsplash.com/photo-1503437313881-503a91226402?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80",
             title: "Bobi and Me"
         },
         style: {
-            backgroundColor: "#00d"
+            backgroundColor: "lightbrown"
         }
     },
     {
@@ -46,6 +50,9 @@ const gNotes = [
                 { txt: "Driving liscence", doneAt: null },
                 { txt: "Coding power", doneAt: 187111111 }
             ]
+        },
+        style: {
+            backgroundColor: "lightbrown"
         }
     }
 ];
@@ -58,13 +65,20 @@ function query(filterBy) {
     }
 
     if (Object.keys(filterBy).length) {
-        console.log(filterBy);
         let { subject } = filterBy
         notes = notes.filter(note => note.type.includes(subject))
     }
 
     return Promise.resolve(notes)
 }
+
+function saveColor(noteId, color) {
+    let notes = _loadFromStorage()
+    const note = notes.find(note => noteId === note.id)
+    note.style.backgroundColor = color
+    _saveToStorage(notes)
+}
+
 
 function removeTask(taskIdx, noteId) {
     let notes = _loadFromStorage()

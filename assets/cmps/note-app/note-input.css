@@ -1,0 +1,47 @@
+.input-imgs input {
+    border: none;
+    width: 450px;
+    height: 40px;
+    box-shadow: 0 0 3px black;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.input-imgs {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    margin: 30px 0;
+    position: relative;
+}
+
+.input-btn-container {
+    position: relative;
+    right: 90px;
+    top: 10px;
+}
+
+
+.input-btn img {
+    width: 15px;
+    margin-left: 10px;
+    cursor: pointer;
+    opacity: 0.2;
+    transition: opacity .1s;
+}
+
+.input-btn img:hover {
+    opacity: 0.8;
+}
+
+.input-btn img.txt {
+    opacity: 1;
+}
+
+.input-btn img.img {
+    opacity: 1;
+}
+
+.input-btn img.todos {
+    opacity: 1;
+}

@@ -1,0 +1,20 @@
+.note-todos {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.note-todos h1 {
+    font-size: 1rem;
+    text-align: center;
+    padding: 10px;
+}
+
+.todos-list {
+    list-style-type: none;
+    cursor: pointer;
+}
+
+.mark {
+    text-decoration: line-through;
+}

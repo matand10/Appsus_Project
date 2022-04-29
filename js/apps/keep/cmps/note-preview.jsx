@@ -14,7 +14,7 @@ export class NotePreview extends React.Component {
         type: this.props.note.type,
         isPinned: false,
         noteStyle: {
-            backgroundColor: 'lightbrown'
+            backgroundColor: this.props.note.style.backgroundColor
         }
     }
 
@@ -23,6 +23,9 @@ export class NotePreview extends React.Component {
     }
 
     setColor = ({ target }) => {
+        const { note } = this.props
+        let value = target.value
+        noteService.saveColor(note.id, value)
         this.setState((prevState) => ({ noteStyle: { ...prevState.noteStyle, backgroundColor: target.value } }))
     }
 
