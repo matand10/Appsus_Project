@@ -20,10 +20,11 @@ let gEmails = storageService.loadFromStorage(USER_KEY)
 function getMails(){
     return Promise.resolve(gEmails)
 }
+
 function query(filterBy) {
     gEmails = storageService.loadFromStorage(USER_KEY) || []
     console.log(gEmails)
-    if (!gEmails) {
+    if (!gEmails.length) {
         _createEmails()
         storageService.saveToStorage(USER_KEY, gEmails)
     }
@@ -56,7 +57,6 @@ function getSort(sortBy) {
 }
 
 function _createEmails() {
-    gEmails = []
     _creatEmail('Hells kitchen', 'fdgffgsdgsdsdsdgsd', 'Gordon Ramsey', ['Critical', 'Memories'])
     _creatEmail('The chef game', 'fdgffgsdgsdsdsdgsd', 'Moshik Rot', ['Family', 'Memories'])
     _creatEmail('The chef game', 'fdgffgsdgsdsdsdgsd', 'Asaf Granit', ['Work', 'Critical'])

@@ -81,10 +81,13 @@ function query(filterBy) {
 
 function createNotedEmail(email) {
     let notes = _loadFromStorage()
+    console.log('before',notes)
     let note = _setEmailToNote(email)
+    console.log('note',note)
     notes.push(note)
-    _saveToStorage(notes)
-    return Promise.resolve(notes)
+    console.log('notes',notes)
+    // _saveToStorage(notes)
+    // return Promise.resolve(notes)
 }
 
 function setNotePosition(fromNoteId, toNoteId) {
@@ -172,7 +175,7 @@ function _setEmailToNote(email) {
     return {
         id: email.id,
         title: email.subject,
-        type: 'type-txt',
+        type: 'note-txt',
         isPinned: false,
         info: { txt: email.body },
         style: {
