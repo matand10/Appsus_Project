@@ -10,7 +10,9 @@ export const noteService = {
     pinNote,
     duplicateNote,
     markTodo,
-    saveColor
+    saveColor,
+    setNotePosition,
+    getYouTubeLink
 }
 
 
@@ -72,6 +74,17 @@ function query(filterBy) {
     return Promise.resolve(notes)
 }
 
+function setNotePosition(fromNoteId, toNoteId) {
+    let notes = _loadFromStorage()
+    let currNote = notes.find(note => note.id === fromNoteId)
+    let fromNoteIdx = notes.findIndex(note => note.id === fromNoteId)
+    let toNoteIdx = notes.findIndex(note => note.id === toNoteId)
+    notes.splice(fromNoteIdx, 1)
+    notes.splice(toNoteIdx, 0, currNote)
+    _saveToStorage(notes)
+    return Promise.resolve(notes)
+}
+
 function saveColor(noteId, color) {
     let notes = _loadFromStorage()
     const note = notes.find(note => noteId === note.id)
@@ -115,7 +128,10 @@ function createNewNote(note) {
         id: utilService.makeId(),
         type: note.type,
         isPinned: false,
-        info: note.info
+        info: note.info,
+        style: {
+            backgroundColor: "lightbrown"
+        }
     }
 }
 
@@ -149,6 +165,11 @@ function getById(noteId) {
     const notes = _loadFromStorage()
     const note = notes.find(note => noteId === note.id)
     return Promise.resolve(note)
+}
+
+function getYouTubeLink(input) {
+    let newInput = input.replace('watch?v=', 'embed/')
+    return newInput
 }
 
 function _saveToStorage(notes) {

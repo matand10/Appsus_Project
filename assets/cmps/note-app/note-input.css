@@ -17,7 +17,7 @@
 
 .input-btn-container {
     position: relative;
-    right: 90px;
+    right: 110px;
     top: 10px;
 }
 
@@ -43,5 +43,9 @@
 }
 
 .input-btn img.todos {
+    opacity: 1;
+}
+
+.input-btn img.video {
     opacity: 1;
 }
