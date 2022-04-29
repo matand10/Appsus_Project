@@ -59,7 +59,8 @@
 .bar{
     display:flex;
     flex-direction: column;
-    margin:10px
+    margin:10px;
+    box-shadow: inset 0 -1px 0 0 rgb(100 121 143 / 12%)
 }
 .bar a{
     text-decoration: none;
@@ -67,6 +68,15 @@
     /* font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif; */
     font-size: .875rem;
     letter-spacing: .2px;
+    font-weight: 700;
+}
+
+.bar a:hover{
+    color:red;
+}
+
+.bar img{
+    width:18px
 }
 
 .count-unread div{

@@ -10,12 +10,16 @@ export const emailService = {
     countUnreadMail,
     addMail,
     deleteEmail,
-    getSort
+    getSort,
+    getMails
 }
 
 const USER_KEY = 'userDB'
 let gEmails = storageService.loadFromStorage(USER_KEY)
 
+function getMails(){
+    return Promise.resolve(gEmails)
+}
 function query(filterBy) {
     gEmails = storageService.loadFromStorage(USER_KEY) || []
     console.log(gEmails)
@@ -113,6 +117,7 @@ function countUnreadMail() {
 function addMail(valSubject, valBody) {
     let emails = storageService.loadFromStorage(USER_KEY)
     let newMail = _creatEmail(valSubject, valBody)
+    newMail.isSent=true
     console.log('new',newMail)
     emails.push(newMail)
     storageService.saveToStorage(USER_KEY, emails)

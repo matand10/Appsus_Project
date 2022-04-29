@@ -1,7 +1,7 @@
 import { EmailDetails } from './email-details.jsx'
 import { emailService } from '../../mail/services/email.service.js'
 
-export class EmailPreview extends React.Component {
+export class SentMailPreview extends React.Component {
     state = {
         emailClicked: null,
         isClicked: false,
@@ -29,24 +29,20 @@ export class EmailPreview extends React.Component {
         ev.stopPropagation()
         this.props.removeMail(emailId)
     }
-
     render() {
-        const { email } = this.props
+        const { sentMail } = this.props
+        console.log(sentMail)
         const { emailClicked, isClicked, isRead } = this.state
         let readImg = isRead ? 'open' : 'close'
         return <section className="email-preview">
-            <tr className="user-mails" onClick={() => this.onClickEmail(email.id)}>
-
-                <td>{email.from}</td>
-                <td>{email.subject}</td>
-                <td><img src={`assets/imgs/notes-imgs/envelope-${readImg}.svg`} onClick={(event) => this.onClickRead(event, email.id)} /></td>
-                <td><img src="assets/imgs/notes-imgs/trash.svg" onClick={(event) => this.onRemove(event, email.id)} /></td>
-                <td>{new Date(email.sentAt).toLocaleTimeString('en-US')}</td>
+            <tr className="user-mails" onClick={() => this.onClickEmail(sentMail.id)}>
+                <td>{sentMail.from}</td>
+                <td>{sentMail.subject}</td>
+                <td><img src={`assets/imgs/notes-imgs/envelope-${readImg}.svg`} onClick={(event) => this.onClickRead(event, sentMail.id)} /></td>
+                <td><img src="assets/imgs/notes-imgs/trash.svg" onClick={(event) => this.onRemove(event, sentMail.id)} /></td>
+                <td>{sentMail.sentAt}</td>
             </tr>
             {isClicked && <EmailDetails email={emailClicked} />}
-
         </section>
-
     }
 }
-

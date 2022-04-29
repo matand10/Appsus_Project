@@ -67,8 +67,8 @@ export class EmailApp extends React.Component {
             <div className="email-board">
                 <EmailList emails={emails} removeMail={this.removeMail} />
                 <nav className="bar">
-                    <Link to="/email">Inbok</Link>
-                    <Link to="/sent">Sent</Link>
+                    <Link to="/email"><img src="assets/imgs/notes-imgs/inbox.svg"/> Inbok</Link>
+                    <Link to="/sent"><img src="assets/imgs/notes-imgs/sent-box.svg"/> Sent</Link>
                     <UnReadCount />
                 </nav>
             </div>
