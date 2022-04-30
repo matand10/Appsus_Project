@@ -102,7 +102,7 @@ function getNotes() {
             title: 'Pedro',
             type: "note-img",
             isPinned: false,
-            info: { url: "../assets/imgs/animation.gif" },
+            info: { url: "assets/imgs/animation.gif" },
             style: {
                 backgroundColor: '#FFE1AF'
             }
