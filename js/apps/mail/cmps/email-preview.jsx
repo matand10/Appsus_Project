@@ -45,7 +45,7 @@ export class EmailPreview extends React.Component {
                 <td>{email.subject}</td>
                 <td><img src={`assets/imgs/notes-imgs/envelope-${readImg}.svg`} onClick={(event) => this.onClickRead(event, email.id)} /></td>
                 <td><img src="assets/imgs/notes-imgs/trash.svg" onClick={(event) => this.onRemove(event, email.id)} /></td>
-                <td><button onClick={() => this.onNote(email)}>Noted</button></td>
+                <td><button onClick={() => this.onNote(email)}><img src="assets/imgs/notes-imgs/email-to-note.svg"/></button></td>
                 <td>{new Date(email.sentAt).toLocaleTimeString('en-US')}</td>
             </tr>
             {isClicked && <EmailDetails email={emailClicked} />}

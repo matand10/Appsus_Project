@@ -104,7 +104,7 @@
 }
 
 td {
-    width: 100px;
+    width: 6.25rem;
     font-weight: 700;
     line-height: 20px;
 }
@@ -112,4 +112,34 @@ td {
 td:nth-child(2) {
     flex-grow: 1;
     text-align: center;
+}
+
+@media (max-width:750px){
+    .email-board {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .bar{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    td:nth-child(5) {
+        width:50px;
+         text-align: center;
+     }
+    td:nth-child(4) {
+       width:50px;
+        text-align: center;
+    }
+    td:nth-child(3) {
+        width:50px;
+         text-align: center;
+     }
+     td:nth-child(6) {
+        width:70px;
+         text-align: center;
+     }
 }
