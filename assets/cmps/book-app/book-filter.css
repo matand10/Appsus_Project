@@ -1,0 +1,27 @@
+.book-filter {
+    padding: 20px;
+}
+
+.book-filter form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.book-filter form label {
+    margin-bottom: 5px;
+}
+
+.book-filter button {
+    border: none;
+    background-color: burlywood;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all .1s;
+}
+
+.book-filter button:hover {
+    color: white;
+    background-color: rgb(123, 99, 67);
+}

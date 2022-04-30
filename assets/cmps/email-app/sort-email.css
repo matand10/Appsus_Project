@@ -1,0 +1,55 @@
+.sort-email {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.sort-by {
+    font-size: 1em;
+    padding: 0.5em 1em 0.5em 0.5em;
+    background: var(--primary-clr-300);
+    color: #3b3c47;
+}
+
+.custom-select {
+    position: relative;
+}
+
+.custom-arrow {
+    position: absolute;
+    background: #3b3c47;
+    display: block;
+    height: 100%;
+    width: 2rem;
+    top: 0;
+    right: 0;
+    pointer-events: none;
+}
+
+.custom-arrow::before,
+.custom-arrow::after {
+    --size: 0.3em;
+
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.custom-arrow::before {
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-bottom: var(--size) solid rgba(255, 255, 255, 0.5);
+    top: 37%;
+}
+
+.custom-arrow::after {
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-top: var(--size) solid rgba(255, 255, 255, 0.5);
+    top: 65%;
+}

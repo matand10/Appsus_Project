@@ -1,0 +1,51 @@
+.user-msg {
+    position: fixed;
+    z-index: 5;
+    top: 100px;
+    right: 50px;
+    width: 400px;
+    height: 100px;
+    padding: 20px;
+    border: 1px solid black;
+    background: #ffffff;
+    display: none;
+    box-shadow: 1px 1px 3px black;
+}
+
+.user-msg .exit-modal {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    border: none;
+    background-color: rgb(8, 8, 8);
+    color: white;
+    border-radius: 50%;
+    height: 22px;
+    width: 22px;
+    transition: opacity .1s;
+}
+
+.user-msg .exit-modal:hover {
+    opacity: 0.8;
+}
+
+.user-msg .fa-times {
+    font-size: 0.8rem;
+}
+
+.user-msg.shown {
+    display: block;
+}
+
+.user-msg.success {
+    background: white;
+    border-radius: 10px;
+    border: 3px solid rgb(36, 179, 0);
+}
+
+.user-msg.danger {
+    background: white;
+    border-radius: 10px;
+    border: 3px solid rgb(242, 121, 121);
+}

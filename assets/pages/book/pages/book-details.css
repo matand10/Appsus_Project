@@ -1,0 +1,23 @@
+.book-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    align-items: center;
+}
+
+.book-details .img-container {
+    max-width: 500px;
+}
+
+.red {
+    color: red;
+}
+
+.btn-container>* {
+    margin: 10px;
+}
+
+.green {
+    color: green;
+}

@@ -1,7 +1,6 @@
 import { noteService } from '../services/note.service.js'
 
 import { eventBusService } from '../../../services/event-bus-service.js'
-import { PinnedNotes } from '../cmps/notes-input/note-pin.jsx'
 import { NoteInput } from '../cmps/note-input.jsx'
 import { NoteList } from '../cmps/note-list.jsx'
 

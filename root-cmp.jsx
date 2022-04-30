@@ -5,6 +5,8 @@ import { NotesApp } from './js/apps/keep/pages/app-notes.jsx'
 import { AddSendEmail } from './js/apps/mail/pages/email-add-send.jsx'
 import { UserMsg } from './js/apps/mail/cmps/user-msg.jsx'
 import { sentMails } from './js/apps/mail/pages/sent-mail.jsx'
+import { BookApp } from './js/pages/book/BookApp.jsx'
+import { BookDetails } from './js/cmps/book/book-details.jsx'
 
 const Router = ReactRouterDOM.HashRouter
 const { Route, Switch } = ReactRouterDOM
@@ -16,6 +18,8 @@ export function App() {
         <hr />
         <section className="app">
             <Switch>
+                <Route path="/book/:bookId" component={BookDetails}></Route>
+                <Route path="/book" component={BookApp}></Route>
                 <Route path="/sent" component={sentMails}></Route>
                 <Route path="/newEmail" component={AddSendEmail}></Route>
                 <Route path="/notes" component={NotesApp}></Route>

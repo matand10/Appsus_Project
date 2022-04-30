@@ -1,0 +1,17 @@
+.book-preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.457);
+    color: black;
+}
+
+.book-preview .img-container {
+    max-width: 100%;
+}
+
+.book-preview h3 {
+    font-size: 1rem;
+}

@@ -9,19 +9,29 @@
 @import './basics/main-layout.css';
 
 
+
 /* Pages */
 @import './pages/home.css';
 
-
+/* Modal */
+@import './pages/modal.css';
 
 /* Components */
 @import './cmps/app-header.css';
+@import './pages//header/search-line.css';
 @import './cmps/note-app/note-preview.css';
 @import './cmps/note-app/note-text.css';
 @import './cmps/note-app/note-todos.css';
 @import './cmps/note-app/note-input.css';
-@import './cmps/note-app/pinned-list.css';
+
+
+@import './cmps/email-app/sort-email.css';
 @import './cmps/email-app/inbox-mail.css';
 @import './cmps/email-app/inbox-mail.css';
 @import './cmps/email-app/user-msg.css';
 @import './cmps/email-app/send-mail.css';
+@import './cmps/app-footer.css';
+
+
+/* Books */
+@import '../assets/books-main.css'

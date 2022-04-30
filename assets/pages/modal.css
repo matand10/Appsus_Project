@@ -1,0 +1,19 @@
+.Modal {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: right;
+    gap: 30px;
+    position: absolute;
+    top: 70px;
+    right: 10px;
+    background-color: lightblue;
+    border-radius: 10px;
+    padding: 50px;
+    z-index: 10;
+    width: 300px;
+}
+
+.Modal .modal-img {
+    width: 50px;
+    float: right;
+}

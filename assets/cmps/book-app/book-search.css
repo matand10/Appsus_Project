@@ -1,0 +1,48 @@
+.book-search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    gap: 10px;
+}
+
+.book-search-preview {
+    position: relative;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.book-search-preview .add-searched-btn {
+    border: none;
+    width: 25px;
+    height: 25px;
+    background-color: burlywood;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    transition: background-color .1s;
+}
+
+.book-search-preview .add-searched-btn:hover {
+    background-color: rgb(185, 148, 98);
+}
+
+.book-search-preview {
+    width: 100%;
+    box-shadow: 0 0 10px black;
+    position: relative;
+    transform: translateY(-450%);
+    overflow: hidden;
+    transition: transform .4s;
+}
+
+.book-search-preview.open {
+    transform: translateY(0%);
+}
+
+.book-search-preview .book-search-preview h1 {
+    text-align: center;
+}

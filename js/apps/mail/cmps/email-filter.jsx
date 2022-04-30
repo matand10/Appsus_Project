@@ -11,7 +11,6 @@ export class FilterItem extends React.Component {
 
     handleChange = ({ target }) => {
         let value = target.value
-        let field = target.name
         this.setState((prevState) => ({ filterBy: { ...prevState.filterBy, subject: value } }))
     }
 
@@ -38,8 +37,10 @@ export class FilterItem extends React.Component {
         return <section className="search-line">
             <form onSubmit={this.onFilter}>
                 <label htmlFor="search"></label>
-                <input id="search" type="search" name="subject" value={subject} onChange={this.handleChange} />
-                <button>Filter</button>
+                <div className="input-container">
+                    <button><img src="../../../../assets/imgs/home/search.svg" /></button>
+                    <input id="search" type="search" name="subject" value={subject} onChange={this.handleChange} />
+                </div>
             </form>
         </section>
     }

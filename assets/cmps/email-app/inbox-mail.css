@@ -2,8 +2,7 @@
     display: flex;
     justify-content: space-between;
     font-size: 12px;
-    margin: 10px;
-    padding: 5px;
+    margin: 5px 0;
 }
 
 .email-board {
@@ -15,7 +14,11 @@
 
 .email-list {
     grid-area: mail;
+    border-right: 1px solid var(--primary-clr-300);
+    border-left: 1px solid var(--primary-clr-300);
+    border-top: 1px solid var(--primary-clr-300);
 }
+
 
 .count-unread {
     grid-area: bar;
@@ -24,11 +27,13 @@
 .email-list table {
     width: 100%
 }
-.email-preview{
+
+.email-preview {
     box-shadow: inset 0 -1px 0 0 rgb(100 121 143 / 12%)
 }
+
 .email-preview :hover {
-    box-shadow: inset 0 -1px 0 0 rgba(27, 31, 35, 0.12);
+    background-color: #dcdcdc;
     cursor: pointer;
 }
 
@@ -45,52 +50,66 @@
     color: #3c4043;
     padding: 10px;
     border-radius: 25px;
-    margin: 10px;
+    margin: 10px 0;
     cursor: pointer;
     border: 2px solid var(--primary-clr-400);
     font-size: 17px;
     box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
 }
 
-.details h1{
-    font-size: 25px;
+.details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    height: 50px;
+    padding: 15px;
+    background-color: #E8E8E8;
 }
 
-.bar{
-    display:flex;
+.details h1,
+.details h3 {
+    font-size: 15px;
+}
+
+.bar {
+    display: flex;
     flex-direction: column;
-    margin:10px;
+    gap: 15px;
+    margin: 10px;
     box-shadow: inset 0 -1px 0 0 rgb(100 121 143 / 12%)
 }
-.bar a{
+
+.bar a {
     text-decoration: none;
-    color:  #202124;
+    color: #202124;
     /* font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif; */
     font-size: .875rem;
     letter-spacing: .2px;
     font-weight: 700;
 }
 
-.bar a:hover{
-    color:red;
+.bar a:hover {
+    color: red;
 }
 
-.bar img{
-    width:18px
+.bar img {
+    width: 18px
 }
 
-.count-unread div{
-    color:  #202124;
+.count-unread div {
+    color: #202124;
     font-size: .875rem;
     letter-spacing: .2px;
 }
 
-td{
+td {
     width: 100px;
     font-weight: 700;
     line-height: 20px;
 }
- td:nth-child(2){
-     flex-grow: 1;
-     text-align: center;
- }
+
+td:nth-child(2) {
+    flex-grow: 1;
+    text-align: center;
+}

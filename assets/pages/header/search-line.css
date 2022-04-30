@@ -1,0 +1,32 @@
+.search-line {
+    position: relative;
+}
+
+.input-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.input-container button {
+    border: none;
+    position: absolute;
+    left: 0;
+    bottom: 2px;
+    background-color: transparent;
+}
+
+#search {
+    height: 15px;
+    padding: 16px 24px;
+    background-color: lightgray;
+    width: 100%;
+    font-size: 1rem;
+    border: none;
+    border-radius: 3px;
+}
+
+.input-container img {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+}

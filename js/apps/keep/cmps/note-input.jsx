@@ -97,7 +97,7 @@ export class NoteInput extends React.Component {
         return <section className="note-input">
             <input type="text" placeholder="Give me a title.." className="title-input"
                 onChange={this.handleTitleChange} ref={this.inputRef} />
-            <form onSubmit={(ev) => this.createNote(ev, note)}>
+            <form onSubmit={(ev) => this.createNote(ev, note)} className="form">
                 <div className="input-imgs">
                     <div className="input-btn-container">
                         <label htmlFor="create-note" className="input-btn">
@@ -107,8 +107,10 @@ export class NoteInput extends React.Component {
                             <img className={isSelected = selectedType === 'note-video' ? 'video' : ''} onClick={(ev) => this.onChangeType(ev, 4)} src="../../../../assets/imgs/notes-input-imgs/video.svg" />
                         </label>
                     </div>
-                    <input type="text" id="create-note" placeholder={placeHolder}
-                        onChange={this.handleChange} />
+                    <div>
+                        <input type="text" id="create-note" placeholder={placeHolder}
+                            onChange={this.handleChange} />
+                    </div>
                 </div>
             </form>
 

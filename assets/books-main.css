@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto:wght@300&display=swap');
+
+@import './pages/book/pages/book-details.css';
+@import './cmps/book-app/book-list.css';
+@import './cmps/book-app/book-preview.css';
+@import './cmps/book-app/book-filter.css';
+@import './cmps/book-app/book-review.css';
+@import './cmps/book-app/book-review-list.css';
+@import './cmps/book-app/book-search.css';
+@import './cmps/book-app/user-msg.css';

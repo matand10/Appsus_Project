@@ -1,5 +1,6 @@
 import { storageService } from '../../../services/storage.service.js'
 import { utilService } from '../../../services/util.service.js'
+import { noteData } from '../services/note.data.js'
 
 export const noteService = {
     query,
@@ -20,49 +21,7 @@ export const noteService = {
 
 
 const NOTES_KEY = 'notesDB'
-const gNotes = [
-    {
-        id: utilService.makeId(),
-        title: 'My time',
-        type: "note-txt",
-        isPinned: true,
-        info: {
-            txt: "Fullstack Me Baby!"
-        },
-        style: {
-            backgroundColor: "lightbrown"
-        }
-    },
-    {
-        id: utilService.makeId(),
-        title: 'My time',
-        type: 'note-img',
-        isPinned: false,
-        info: {
-            url: "https://images.unsplash.com/photo-1503437313881-503a91226402?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80",
-            title: "Bobi and Me"
-        },
-        style: {
-            backgroundColor: "lightbrown"
-        }
-    },
-    {
-        id: utilService.makeId(),
-        title: 'My time',
-        type: "note-todos",
-        isPinned: false,
-        info: {
-            label: "Get my stuff together",
-            todos: [
-                { txt: "Driving liscence", doneAt: null },
-                { txt: "Coding power", doneAt: 187111111 }
-            ]
-        },
-        style: {
-            backgroundColor: "lightbrown"
-        }
-    }
-];
+const gNotes = noteData.getNotes();
 
 function query(filterBy) {
     let notes = _loadFromStorage()
@@ -81,13 +40,11 @@ function query(filterBy) {
 
 function createNotedEmail(email) {
     let notes = _loadFromStorage()
-    console.log('before',notes)
+    console.log('before', notes)
     let note = _setEmailToNote(email)
-    console.log('note',note)
+    console.log('note', note)
     notes.push(note)
-    console.log('notes',notes)
-    // _saveToStorage(notes)
-    // return Promise.resolve(notes)
+    console.log('notes', notes)
 }
 
 function setNotePosition(fromNoteId, toNoteId) {
@@ -111,7 +68,6 @@ function saveColor(noteId, color) {
 function editText(value, noteId) {
     let notes = _loadFromStorage()
     let note = notes.find(note => note.id === noteId)
-    console.log(note);
     switch (note.type) {
         case 'note-img':
             note.info.title = value

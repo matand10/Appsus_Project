@@ -1,18 +1,36 @@
-import {FilterItem} from '../../js/apps/mail/cmps/email-filter.jsx'
+import { FilterItem } from '../../js/apps/mail/cmps/email-filter.jsx'
+import { Modal } from '../pages/main-modal.jsx'
 
 const { Link, NavLink, withRouter } = ReactRouterDOM
 
-function _AppHeader(props) {
-    return <header className="app-header main-layout">
-        <h3 onClick={() => props.history.goBack()}>Appsus</h3>
-        <FilterItem />
-        <nav className="header-nav">
-            <NavLink className="nav" to="/" exact>Home</NavLink>
+class _AppHeader extends React.Component {
 
-            {/* <NavLink to="/email">Email</NavLink> */}
-            {/* <NavLink to="/notes" >Notes</NavLink> */}
-        </nav>
-    </header>
+    state = {
+        isModalOpen: false
+    }
+
+    toggleModal() {
+        this.setState({ isModalOpen: !this.state.isModalOpen })
+    }
+
+    closeModal = (value) => {
+        this.setState({ isModalOpen: value })
+    }
+
+
+    render() {
+        const { isModalOpen } = this.state
+        return <header className="app-header main-layout">
+            <div className="logo" onClick={() => this.props.history.push('/')}>
+                <img src="../assets/imgs/logo.png" />
+            </div>
+            <FilterItem />
+            <nav className="header-nav">
+                <img onClick={() => this.toggleModal()} className="dots-menu" src="./assets/imgs/home/dots-menu.svg" />
+            </nav>
+            {isModalOpen && <Modal close={this.closeModal} />}
+        </header>
+    }
 }
 
 export const AppHeader = withRouter(_AppHeader)

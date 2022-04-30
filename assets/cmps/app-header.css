@@ -3,6 +3,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+}
+
+.logo {
+    cursor: pointer;
+}
+
+.logo img {
+    width: 90px;
 }
 
 .header-nav {
@@ -14,4 +23,11 @@
     height: 80px;
     display: flex;
     align-items: center;
+}
+
+.app-header .search-line {
+    align-self: left;
+    width: 50%;
+    position: absolute;
+    left: 160px;
 }

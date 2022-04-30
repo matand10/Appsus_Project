@@ -67,7 +67,7 @@ export class EmailApp extends React.Component {
     render() {
         const { emails } = this.state
         if (!emails.length) return <h1>No emails</h1>
-        return <section className="email-app">
+        return <section className="email-app main-layout" >
             <Link to='/newEmail'><button className="new-mail"><img src="assets/imgs/notes-imgs/icon-google.webp" /> Compose</button></Link>
             <SortEmail setSort={this.setSort} />
             <div className="email-board">
