@@ -22,11 +22,11 @@ class _AppHeader extends React.Component {
         const { isModalOpen } = this.state
         return <header className="app-header main-layout">
             <div className="logo" onClick={() => this.props.history.push('/')}>
-                <img src="../assets/imgs/logo.png" />
+                <img src="assets/imgs/logo.png" />
             </div>
             <FilterItem />
             <nav className="header-nav">
-                <img onClick={() => this.toggleModal()} className="dots-menu" src="./assets/imgs/home/dots-menu.svg" />
+                <img onClick={() => this.toggleModal()} className="dots-menu" src="assets/imgs/home/dots-menu.svg" />
             </nav>
             {isModalOpen && <Modal close={this.closeModal} />}
         </header>

@@ -1,29 +1,73 @@
-.send-mail{
-    width:500px;
-    height:700px;
-    transform: translate(50% ,10%);
-    box-shadow: inset 0 -1px 0 0 rgba(27, 31, 35, 0.12);
+.send-mail {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 60px;
+    align-items: center;
+    height: 600px;
 }
 
-.send-mail header{
-    color:var(--primary-clr-300);
+.send-mail-container {
+    background-color: var(--primary-clr-300);
+    width: 80%;
+    position: relative;
+    height: 250px;
+}
+
+.exit-mail {
+    background-color: #232b2b;
+    color: white;
+    height: 40px;
+    width: 80px;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: .1s;
+
+}
+
+.exit-mail:hover {
+    background-color: #171c1c;
+}
+
+.send-mail header {
+    color: var(--primary-clr-300);
     background-color: var(--primary-clr-600);
-    height:30px;
-    margin:10px;
+    height: 30px;
+    padding: 5px;
 }
-
 
 .send-mail .send {
+    margin-top: 20px;
+    height: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 10px;
-    margin: 10px;
-    padding: 10px;
+    gap: 25px;
 }
 
-.send-mail .send button {
-    align-self: flex-end;
+.label-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.send-mail .send .submit-email-btn {
+    cursor: pointer;
+    background-color: #3CB371;
+    border: none;
+    width: 60%;
+    align-self: center;
+    /* position: absolute; */
+    border-radius: 2px;
+    transition: .1s;
+}
+
+.send-mail .send .submit-email-btn:hover {
+    background-color: #149a50;
 }
 
 .send-mail .send img {

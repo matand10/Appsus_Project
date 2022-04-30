@@ -42,20 +42,28 @@ export class AddSendEmail extends React.Component {
         const { subject, body } = this.state
 
         return <section className="send-mail">
-            <Link to="/email"><button>X</button></Link>
-            <header>New message:</header>
-            <form className="send" onSubmit={(event) => this.onSend(event)}>
-                <label>To:
-                    <input type="text" name="mailTo" />
-                </label>
-                <label>Subject:
-                    <input onChange={this.handleChange} value={subject} type="text" name="subject" />
-                </label>
-                <label>Text:
-                    <input onChange={this.handleChange} value={body} type="textarea" name="body" />
-                </label>
-                <button><img src="assets/imgs/notes-imgs/send.svg" /></button>
-            </form>
+            <div className="send-mail-container">
+                <header>New message:</header>
+                <form className="send" onSubmit={(event) => this.onSend(event)}>
+                    <div className="label-container">
+                        <label>To:</label>
+                        <input type="text" name="mailTo" />
+                    </div>
+
+                    <div className="label-container">
+                        <label>Subject:</label>
+                        <input onChange={this.handleChange} value={subject} type="text" name="subject" />
+                    </div>
+
+                    <div className="label-container">
+                        <label>Text:</label>
+                        <input onChange={this.handleChange} value={body} type="textarea" name="body" />
+                    </div>
+
+                    <button className="submit-email-btn"><img src="assets/imgs/notes-imgs/send.svg" /></button>
+                </form>
+            </div>
+            <Link to="/email"><button className="exit-mail">Close</button></Link>
         </section>
     }
 }

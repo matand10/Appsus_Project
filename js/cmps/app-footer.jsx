@@ -3,14 +3,16 @@
 
 export function AppFooter() {
 
-
+    const style = {
+        background: "url('assets/imgs/footer/wave.png')"
+    }
 
     return <footer className="main-footer">
         <div className="waves">
-            <div className="wave" id="wave1"></div>
-            <div className="wave" id="wave2"></div>
-            <div className="wave" id="wave3"></div>
-            <div className="wave" id="wave4"></div>
+            <div className="wave" id="wave1" style={style}></div>
+            <div className="wave" id="wave2" style={style}></div>
+            <div className="wave" id="wave3" style={style}></div>
+            <div className="wave" id="wave4" style={style}></div>
         </div>
         <div className="footer-nav">
             <ul className="nav">

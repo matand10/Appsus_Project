@@ -73,12 +73,12 @@ export class NotePreview extends React.Component {
         return <section draggable onDrop={(ev) => this.dragDropped(ev, note)} onDragOver={(ev) => this.draggingOver(ev)} onDragStart={(ev) => this.dragStarted(ev, note)} className="note-preview" style={noteStyle}>
             {note && <DynamicCmp type={type} note={note} changeText={this.changeNoteText} />}
             <div className="btn-container">
-                <img className={`note-btn ${isPinned}`} onClick={() => this.onPinNote(note.id)} src="../../../../assets/imgs/notes-imgs/pin.svg" />
-                <img className="note-btn" onClick={() => this.onDuplicateNote(note.id)} src="../../../../assets/imgs/notes-imgs/clone.svg" />
-                <img className="note-btn" src="../../../../assets/imgs/notes-imgs/color.svg" />
+                <img className={`note-btn ${isPinned}`} onClick={() => this.onPinNote(note.id)} src="assets/imgs/notes-imgs/pin.svg" />
+                <img className="note-btn" onClick={() => this.onDuplicateNote(note.id)} src="assets/imgs/notes-imgs/clone.svg" />
+                <img className="note-btn" src="assets/imgs/notes-imgs/color.svg" />
                 <input type="color" onChange={this.setColor} className="color-input" />
-                <img className="note-btn" onClick={() => this.onConvertNoteToEmail(note)} src="../../../../assets/imgs/notes-imgs/mail.svg" />
-                <img className="note-btn" onClick={() => this.onDeleteNote(note.id)} src="../../../../assets/imgs/notes-imgs/trash.svg" title="Delete" />
+                <img className="note-btn" onClick={() => this.onConvertNoteToEmail(note)} src="assets/imgs/notes-imgs/mail.svg" />
+                <img className="note-btn" onClick={() => this.onDeleteNote(note.id)} src="assets/imgs/notes-imgs/trash.svg" title="Delete" />
             </div>
         </section>
     }

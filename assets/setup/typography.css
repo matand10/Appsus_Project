@@ -7,3 +7,8 @@
     font-family: eurofurence;
     src: url('../../fonts/eurofurence/eurof35.ttf');
 }
+
+@font-face {
+    font-family: Email;
+    src: url('../../fonts/eurofurence/eurof35.ttf');
+}
