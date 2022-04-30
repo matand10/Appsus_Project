@@ -59,6 +59,10 @@ export class NotePreview extends React.Component {
         this.props.saveText(value, note)
     }
 
+    onConvertNoteToEmail = (note) => {
+        this.props.convertNoteToEmail(note)
+    }
+
 
     render() {
         const { type, noteStyle } = this.state
@@ -73,7 +77,7 @@ export class NotePreview extends React.Component {
                 <img className="note-btn" onClick={() => this.onDuplicateNote(note.id)} src="../../../../assets/imgs/notes-imgs/clone.svg" />
                 <img className="note-btn" src="../../../../assets/imgs/notes-imgs/color.svg" />
                 <input type="color" onChange={this.setColor} className="color-input" />
-                <img className="note-btn" src="../../../../assets/imgs/notes-imgs/mail.svg" />
+                <img className="note-btn" onClick={() => this.onConvertNoteToEmail(note)} src="../../../../assets/imgs/notes-imgs/mail.svg" />
                 <img className="note-btn" onClick={() => this.onDeleteNote(note.id)} src="../../../../assets/imgs/notes-imgs/trash.svg" title="Delete" />
             </div>
         </section>

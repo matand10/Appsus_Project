@@ -1,4 +1,5 @@
 import { noteService } from '../services/note.service.js'
+import { emailService } from '../../mail/services/email.service.js'
 
 import { eventBusService } from '../../../services/event-bus-service.js'
 import { NoteInput } from '../cmps/note-input.jsx'
@@ -67,6 +68,15 @@ export class NotesApp extends React.Component {
             .then(this.loadNotes)
     }
 
+    convertNoteToEmail = (note) => {
+        emailService.addNoteToMail(note)
+            .then((newMail) => {
+                eventBusService.emit('note-to-email', newMail)
+            })
+
+        this.props.history.push('/newEmail')
+    }
+
 
     render() {
         const { notes } = this.state
@@ -77,7 +87,7 @@ export class NotesApp extends React.Component {
             <hr />
             {notes.length > 0 && <div>
                 {/* <PinnedNotes notes={notes} onDelete={this.onDelete} onPin={this.onPin} onDuplicate={this.onDuplicate} /> */}
-                <NoteList saveText={this.saveText} notes={notes} onDragNote={this.onDragNote} onDelete={this.onDelete} onPin={this.onPin} onDuplicate={this.onDuplicate} />
+                <NoteList convertNoteToEmail={this.convertNoteToEmail} saveText={this.saveText} notes={notes} onDragNote={this.onDragNote} onDelete={this.onDelete} onPin={this.onPin} onDuplicate={this.onDuplicate} />
             </div>}
         </section>
     }

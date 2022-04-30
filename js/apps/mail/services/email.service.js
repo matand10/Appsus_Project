@@ -11,13 +11,14 @@ export const emailService = {
     addMail,
     deleteEmail,
     getSort,
-    getMails
+    getMails,
+    addNoteToMail
 }
 
 const USER_KEY = 'userDB'
 let gEmails = storageService.loadFromStorage(USER_KEY)
 
-function getMails(){
+function getMails() {
     return Promise.resolve(gEmails)
 }
 
@@ -83,7 +84,7 @@ function _creatEmail(subject = utilService.makeLorem(10), body = utilService.mak
         //     draft
         // },
         isStared: false,
-        isSent:false,
+        isSent: false,
         lables
     }
     gEmails.push(email)
@@ -117,11 +118,36 @@ function countUnreadMail() {
 function addMail(valSubject, valBody) {
     let emails = storageService.loadFromStorage(USER_KEY)
     let newMail = _creatEmail(valSubject, valBody)
-    newMail.isSent=true
-    console.log('new',newMail)
+    newMail.isSent = true
+    console.log('new', newMail)
     emails.push(newMail)
     storageService.saveToStorage(USER_KEY, emails)
     return Promise.resolve(emails)
+}
+
+function addNoteToMail(note) {
+    // let emails = storageService.loadFromStorage(USER_KEY)
+    let newMail
+    switch (note.type) {
+        case 'note-txt':
+            newMail = _creatEmail(note.title, note.info.txt)
+            // emails.push(newMail)
+            break;
+        case 'note-img':
+            newMail = _creatEmail(note.title, note.info.img)
+            // emails.push(newMail)
+            break;
+        case 'note-todos':
+            newMail = _creatEmail(note.title, note.info.todos)
+            // emails.push(newMail)
+            break;
+        case 'note-video':
+            newMail = _creatEmail(note.title, note.info.video)
+            // emails.push(newMail)
+            break
+    }
+    // storageService.saveToStorage(USER_KEY, emails)
+    return Promise.resolve(newMail)
 }
 
 function deleteEmail(emailId) {

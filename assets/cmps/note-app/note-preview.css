@@ -32,7 +32,7 @@
 }
 
 .note-preview .note-btn {
-    width: 13px;
+    width: 10px;
     cursor: pointer;
     transition: opacity .2s;
 }

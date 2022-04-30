@@ -61,7 +61,7 @@ export class EmailApp extends React.Component {
 
     getEmailToNote = (email) => {
         noteService.createNotedEmail(email)
-        // this.props.history.push('/notes')
+        this.props.history.push('/notes')
     }
 
     render() {
