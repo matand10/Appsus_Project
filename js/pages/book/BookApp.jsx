@@ -44,7 +44,9 @@ export class BookApp extends React.Component {
 
     render() {
         const { books } = this.state
-        if (!books.length) return <img className="loader" src="assets/imgs/miss-books/loader2.gif" />
+        if (!books.length) return <section className="loader-container">
+            <img className="loader" src="assets/imgs/miss-books/loader2.gif" />
+        </section>
 
         return (
             <section className="book-app">

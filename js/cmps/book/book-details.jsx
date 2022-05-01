@@ -93,13 +93,6 @@ export class BookDetails extends React.Component {
         const nextBookId = bookService.getNextBookId(book.id)
         const prevBookId = bookService.getPrevBookId(book.id)
 
-        console.log('next', nextBookId);
-        console.log('curr', book.id);
-        console.log('prev', prevBookId);
-
-
-
-
         return <section className="book-details">
             {isOnSale && <h1>On Sale! 🔥</h1>}
             <h2>Title: {book.title}</h2>
@@ -117,11 +110,9 @@ export class BookDetails extends React.Component {
                 toggleLongTxtShown={this.toggleLongTxtShown} />
             <h3>Authors: {book.authors}</h3>
 
-            <div className="btn-container">
-                <button onClick={this.onGoBack}>Back</button>
-                <Link to={`/book/${nextBookId}`}><button>Next Book</button></Link>
-                <Link to={`/book/${prevBookId}`}><button>Prev Book</button></Link>
-            </div>
+
+            <button onClick={this.onGoBack}>Back</button>
+
 
 
             <ReviewBook onAddReview={this.onAddReview} />

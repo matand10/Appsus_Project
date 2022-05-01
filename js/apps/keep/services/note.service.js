@@ -15,7 +15,8 @@ export const noteService = {
     setNotePosition,
     getYouTubeLink,
     editText,
-    createNotedEmail
+    createNotedEmail,
+    addTask
 }
 
 
@@ -80,6 +81,16 @@ function editText(value, noteId) {
     }
     _saveToStorage(notes)
     return Promise.resolve(notes)
+}
+
+function addTask(task, noteId) {
+    let notes = _loadFromStorage()
+    let noteIdx = notes.findIndex(note => note.id === noteId)
+    let newTask = makeTodo(task)
+    notes[noteIdx].info.todos.push(newTask)
+    let todos = notes[noteIdx].info.todos
+    _saveToStorage(notes)
+    return Promise.resolve(todos)
 }
 
 
@@ -163,6 +174,13 @@ function pinNote(noteId) {
     notes.splice(0, 0, currNote[0])
     _saveToStorage(notes)
     return Promise.resolve(notes)
+}
+
+function makeTodo(task) {
+    return {
+        txt: task,
+        doneAt: null
+    }
 }
 
 function getById(noteId) {

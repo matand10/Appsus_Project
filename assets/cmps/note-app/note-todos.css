@@ -27,3 +27,18 @@
 .mark {
     text-decoration: line-through;
 }
+
+.add-task-form {
+    align-self: center;
+    margin-top: 30px;
+}
+
+.add-task-form form input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+.add-task-form form input {
+    outline: none;
+}

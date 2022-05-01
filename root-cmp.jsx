@@ -7,7 +7,7 @@ import { UserMsg } from './js/apps/mail/cmps/user-msg.jsx'
 import { sentMails } from './js/apps/mail/pages/sent-mail.jsx'
 import { BookApp } from './js/pages/book/BookApp.jsx'
 import { BookDetails } from './js/cmps/book/book-details.jsx'
-import { AppAbout } from './js/cmps/book/book-details.jsx'
+import { AppAbout } from './js/pages/app-about.jsx'
 
 const Router = ReactRouterDOM.HashRouter
 const { Route, Switch } = ReactRouterDOM

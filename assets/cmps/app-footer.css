@@ -2,7 +2,7 @@ footer {
     position: absolute;
     width: 100%;
     background-color: #3586ff;
-    min-height: 100px;
+    min-height: 150px;
     bottom: 0;
     padding: 20px;
     display: flex;
