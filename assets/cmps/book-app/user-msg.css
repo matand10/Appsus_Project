@@ -1,15 +1,15 @@
 .user-msg {
     position: fixed;
     z-index: 5;
-    top: 100px;
-    right: 50px;
-    width: 400px;
-    height: 100px;
+    bottom: 20px;
+    left: 20px;
+    width: 300px;
+    height: 60px;
     padding: 20px;
-    border: 1px solid black;
-    background: #ffffff;
+    background: var(--primary-clr-800);
     display: none;
     box-shadow: 1px 1px 3px black;
+    color: white;
 }
 
 .user-msg .exit-modal {
@@ -39,13 +39,13 @@
 }
 
 .user-msg.success {
-    background: white;
+    background: var(--primary-clr-800);
     border-radius: 10px;
-    border: 3px solid rgb(36, 179, 0);
+   
 }
 
 .user-msg.danger {
-    background: white;
+    background: var(--primary-clr-800);;
     border-radius: 10px;
-    border: 3px solid rgb(242, 121, 121);
+    
 }

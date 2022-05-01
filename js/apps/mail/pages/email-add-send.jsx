@@ -46,18 +46,18 @@ export class AddSendEmail extends React.Component {
                 <header>New message:</header>
                 <form className="send" onSubmit={(event) => this.onSend(event)}>
                     <div className="label-container">
-                        <label>To:</label>
-                        <input type="text" name="mailTo" />
+                        <label></label>
+                        <input type="text" name="mailTo" placeholder="To:"/>
                     </div>
 
                     <div className="label-container">
-                        <label>Subject:</label>
-                        <input onChange={this.handleChange} value={subject} type="text" name="subject" />
+                        <label></label>
+                        <input onChange={this.handleChange} value={subject} type="text" name="subject" placeholder="Subject:"/>
                     </div>
 
                     <div className="label-container">
-                        <label>Text:</label>
-                        <input onChange={this.handleChange} value={body} type="textarea" name="body" />
+                        <label></label>
+                        <textarea onChange={this.handleChange} value={body} type="textarea" name="body" cols="30" rows="10" placeholder="Text:"></textarea>
                     </div>
 
                     <button className="submit-email-btn"><img src="assets/imgs/notes-imgs/send.svg" /></button>
