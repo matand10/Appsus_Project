@@ -63,6 +63,7 @@ textarea {
 .send-mail .send .submit-email-btn:hover {
     background-color: var(--primary-clr-600);
 }
+
 .exit-mail {
     background-color: #232b2b;
     color: white;
@@ -103,18 +104,6 @@ textarea {
     align-items: center;
     justify-content: space-around;
 }
-
-/* .send-mail .send .submit-email-btn {
-    cursor: pointer;
-    background-color: #3CB371;
-    border: none;
-    width: 60%;
-    align-self: center;
-    /* position: absolute; */
-    /* border-radius: 2px;
-    transition: .1s;
-} */ 
-
 
 .send-mail .send img {
     width: 30px
