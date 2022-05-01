@@ -1,4 +1,4 @@
-
+const { NavLink, withRouter } = ReactRouterDOM
 
 
 export function AppFooter() {
@@ -21,9 +21,8 @@ export function AppFooter() {
                 <li><i className="fab fa-twitter-square"></i></li>
             </ul>
             <ul className="menu">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
+                <NavLink to="/">Home</NavLink>
+                <NavLink to="/about">About Us</NavLink>
             </ul>
             <p>2022 | All Rights Reserved | Yael and Matan's Project</p>
         </div>
