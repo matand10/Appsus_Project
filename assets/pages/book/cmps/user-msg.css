@@ -39,9 +39,11 @@
 }
 
 .user-msg.success {
-    background: white;
+    /* background: white; */
     border-radius: 10px;
-    border: 3px solid rgb(36, 179, 0);
+    /* border: 3px solid rgb(36, 179, 0); */
+    background: var(--primary-clr-800);
+    color: var(--primary-clr-300);
 }
 
 .user-msg.danger {

@@ -64,19 +64,30 @@ export class EmailApp extends React.Component {
         this.props.history.push('/notes')
     }
 
+    updateRead = (updateEmails) => {
+        this.setState({ emails: updateEmails })
+    }
+
     render() {
         const { emails } = this.state
         if (!emails.length) return <h1>No emails</h1>
         return <section className="email-app main-layout" >
-            <Link to='/newEmail'><button className="new-mail"><img src="assets/imgs/notes-imgs/icon-google.webp" /> Compose</button></Link>
-            <SortEmail setSort={this.setSort} />
+            <div className="compose-sort-container">
+                <Link to='/newEmail'>
+                    <button className="new-mail">
+                        <img src="assets/imgs/notes-imgs/icon-google.webp" />
+                        <p>Compose</p>
+                    </button>
+                </Link>
+                <SortEmail setSort={this.setSort} />
+            </div>
             <div className="email-board">
                 <nav className="bar">
                     <Link to="/email"><img src="assets/imgs/notes-imgs/inbox.svg" /> Inbok</Link>
                     <Link to="/sent"><img src="assets/imgs/notes-imgs/sent-box.svg" /> Sent</Link>
                     <UnReadCount />
                 </nav>
-                <EmailList emails={emails} removeMail={this.removeMail} getEmailToNote={this.getEmailToNote} />
+                <EmailList emails={emails} removeMail={this.removeMail} getEmailToNote={this.getEmailToNote} updateRead={this.updateRead}/>
             </div>
         </section>
     }

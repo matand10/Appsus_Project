@@ -18,11 +18,12 @@ export class EmailPreview extends React.Component {
     onClickRead = (ev, emailId) => {
         ev.stopPropagation()
         const { isRead } = this.state
-        emailService.getEmailById(emailId)
-            .then(email => {
-                emailService.updateKey(email.id, 'isRead')
+        emailService.updateKey(emailId, 'isRead')
+            .then((updateEmails) => {
+                this.props.updateRead(updateEmails)
                 this.setState({ isRead: !isRead })
             })
+    
     }
 
     onRemove = (ev, emailId) => {
@@ -30,26 +31,38 @@ export class EmailPreview extends React.Component {
         this.props.removeMail(emailId)
     }
 
-    onNote = (email) => {
+    onNote = (ev,email) => {
+        ev.stopPropagation()
         this.props.getEmailToNote(email)
+    }
+
+    get setTime() {
+        const { email } = this.props
+        let hours = new Date(email.sentAt).getHours()
+        let minutes = new Date(email.sentAt).getMinutes()
+        hours = (hours < 10) ? '0' + hours : hours
+        minutes = (minutes < 10) ? '0' + minutes : minutes
+        let outPut = hours + ':' + minutes
+        return outPut
     }
 
     render() {
         const { email } = this.props
-        const { emailClicked, isClicked, isRead } = this.state
-        let readImg = isRead ? 'open' : 'close'
+        const { emailClicked, isClicked, realTime } = this.state
+        let readImg = email.isRead ? 'open' : 'close'
+        let readTitle = email.isRead ? 'Unread' : 'Read'
+        let time = this.setTime
         return <section className="email-preview">
             <tr className="user-mails" onClick={() => this.onClickEmail(email.id)}>
 
-                <td>{email.from}</td>
-                <td>{email.subject}</td>
-                <td><img src={`assets/imgs/notes-imgs/envelope-${readImg}.svg`} onClick={(event) => this.onClickRead(event, email.id)} /></td>
-                <td><img src="assets/imgs/notes-imgs/trash.svg" onClick={(event) => this.onRemove(event, email.id)} /></td>
-                <td><button onClick={() => this.onNote(email)}><img src="assets/imgs/notes-imgs/email-to-note.svg"/></button></td>
-                <td>{new Date(email.sentAt).toLocaleTimeString('en-US')}</td>
+                <td className={readTitle}>{email.from}</td>
+                <td className={readTitle}>{email.subject}</td>
+                <td><img src={`assets/imgs/notes-imgs/envelope-${readImg}.svg`} onClick={(event) => this.onClickRead(event, email.id)} title={`${readTitle} email`} /></td>
+                <td><img src="assets/imgs/notes-imgs/trash.svg" onClick={(event) => this.onRemove(event, email.id)} title="Delete email" /></td>
+                <td><button onClick={(event) => this.onNote(event,email)}><img src="assets/imgs/notes-imgs/email-to-note.svg" title="Send email to your note" /></button></td>
+                <td className={readTitle}>{time}</td>
             </tr>
-            {isClicked && <EmailDetails email={emailClicked} />}
-
+                {isClicked && <EmailDetails email={emailClicked} />}
         </section>
 
     }

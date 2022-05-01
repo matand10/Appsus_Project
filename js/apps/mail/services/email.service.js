@@ -99,13 +99,10 @@ function getEmailById(emailId) {
 
 function updateKey(emailId, key) {
     let emails = storageService.loadFromStorage(USER_KEY)
-    let email = emails.find(email => {
-        if (emailId === email.id) {
-            email[key] = true
-            storageService.saveToStorage(USER_KEY, emails)
-        }
-    })
-    return Promise.resolve(email)
+    let email = emails.find(email => emailId === email.id)
+    email[key] = !email[key] 
+    storageService.saveToStorage(USER_KEY, emails)
+    return Promise.resolve(emails)
 }
 
 function countUnreadMail() {
@@ -119,7 +116,6 @@ function addMail(valSubject, valBody) {
     let emails = storageService.loadFromStorage(USER_KEY)
     let newMail = _creatEmail(valSubject, valBody)
     newMail.isSent = true
-    console.log('new', newMail)
     emails.push(newMail)
     storageService.saveToStorage(USER_KEY, emails)
     return Promise.resolve(emails)
