@@ -40,6 +40,7 @@ function query(filterBy) {
 
 function createNotedEmail(email) {
     let notes = _loadFromStorage()
+    if (!notes) notes = noteData.getNotes();
     let note = _setEmailToNote(email)
     notes.push(note)
     _saveToStorage(notes)

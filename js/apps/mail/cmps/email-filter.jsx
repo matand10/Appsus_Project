@@ -37,7 +37,7 @@ export class FilterItem extends React.Component {
         return <section className="search-line">
             <form onSubmit={this.onFilter}>
                 <label htmlFor="search"></label>
-                <div className="input-container">
+                <div className="header-input-container">
                     <button><img src="assets/imgs/home/search.svg" /></button>
                     <input id="search" type="search" name="subject" value={subject} onChange={this.handleChange} />
                 </div>

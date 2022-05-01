@@ -1,6 +1,9 @@
 import { utilService } from '../../../services/util.service.js'
 import { noteService } from '../../keep/services/note.service.js'
 
+
+import { MainInput } from '../cmps/notes-input/note-main-input.jsx'
+
 export class NoteInput extends React.Component {
 
     state = {
@@ -10,15 +13,16 @@ export class NoteInput extends React.Component {
             isPinned: false,
             type: 'note-txt'
         },
-        selectedType: 'note-txt'
+        selectedType: 'note-txt',
+        isInputClicked: false
     }
 
     inputRef = React.createRef()
 
 
-    componentDidMount() {
-        this.inputRef.current.focus()
-    }
+    // componentDidMount() {
+    //     this.inputRef.current.focus()
+    // }
 
     handleTitleChange = ({ target }) => {
         const value = target.value
@@ -44,6 +48,7 @@ export class NoteInput extends React.Component {
         if (note.type === 'note-todos') this.setTodos(note)
         if (note.type === 'note-video') note.info.url = noteService.getYouTubeLink(note.info.url)
         this.props.onCreate(note)
+        this.toggleInput(false)
     }
 
     onChangeType = (ev, num) => {
@@ -89,31 +94,39 @@ export class NoteInput extends React.Component {
     }
 
 
+    toggleInput = (value) => {
+        this.setState((prevState) => ({ ...prevState, isInputClicked: value }))
+    }
+
     render() {
-        const { note, selectedType } = this.state
+        const { note, selectedType, isInputClicked } = this.state
         let isSelected = this.onSelectedType
         let placeHolder = this.onUserGuide
 
         return <section className="note-input">
-            <input type="text" placeholder="Give me a title.." className="title-input"
-                onChange={this.handleTitleChange} ref={this.inputRef} />
-            <form onSubmit={(ev) => this.createNote(ev, note)} className="form">
-                <div className="input-imgs">
-                    <div className="input-btn-container">
+            <form onSubmit={(ev) => this.createNote(ev, note)} className="note-form" autoComplete="off">
+                <div className="main-input-container">
+
+                    {isInputClicked && <div className="input-container">
+                        <input type="text" placeholder="Title" className="input title-input"
+                            onChange={this.handleTitleChange} />
+                    </div>}
+                    <div className="input-container">
+                        <input onClick={(ev) => this.toggleInput(true)} type="text" id="create-note" placeholder={placeHolder}
+                            className="input text-input" onChange={this.handleChange} />
+                    </div>
+                    {isInputClicked && <div className="input-container imgs">
                         <label htmlFor="create-note" className="input-btn">
-                            <img className={isSelected = selectedType === 'note-txt' ? 'txt' : ''} onClick={(ev) => this.onChangeType(ev, 1)} src="assets/imgs/notes-input-imgs/text.svg" />
-                            <img className={isSelected = selectedType === 'note-img' ? 'img' : ''} onClick={(ev) => this.onChangeType(ev, 2)} src="assets/imgs/notes-input-imgs/image.svg" />
-                            <img className={isSelected = selectedType === 'note-todos' ? 'todos' : ''} onClick={(ev) => this.onChangeType(ev, 3)} src="assets/imgs/notes-input-imgs/list.svg" />
-                            <img className={isSelected = selectedType === 'note-video' ? 'video' : ''} onClick={(ev) => this.onChangeType(ev, 4)} src="assets/imgs/notes-input-imgs/video.svg" />
+                            <img className={isSelected === 'txt' ? 'txt' : ''} onClick={(ev) => this.onChangeType(ev, 1)} src="assets/imgs/notes-input-imgs/text.svg" />
+                            <img className={isSelected === 'img' ? 'img' : ''} onClick={(ev) => this.onChangeType(ev, 2)} src="assets/imgs/notes-input-imgs/image.svg" />
+                            <img className={isSelected === 'todos' ? 'todos' : ''} onClick={(ev) => this.onChangeType(ev, 3)} src="assets/imgs/notes-input-imgs/list.svg" />
+                            <img className={isSelected === 'video' ? 'video' : ''} onClick={(ev) => this.onChangeType(ev, 4)} src="assets/imgs/notes-input-imgs/video.svg" />
                         </label>
-                    </div>
-                    <div>
-                        <input type="text" id="create-note" placeholder={placeHolder}
-                            onChange={this.handleChange} />
-                    </div>
+                    </div>}
+                    <button hidden>Close</button>
+                    {isInputClicked && <div onClick={() => this.toggleInput(false)} className="close">Close</div>}
                 </div>
             </form>
-
         </section>
     }
 }

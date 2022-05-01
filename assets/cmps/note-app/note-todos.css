@@ -5,14 +5,23 @@
 }
 
 .note-todos h1 {
-    font-size: 1rem;
+    font-size: 1.3rem;
     text-align: center;
-    padding: 10px;
+    padding: 10px 20px 20px 20px;
 }
 
 .todos-list {
     list-style-type: none;
+    margin: 0;
     cursor: pointer;
+}
+
+.todos-list li {
+    margin: 0;
+}
+
+.todos-list li button {
+    margin-right: 30px;
 }
 
 .mark {

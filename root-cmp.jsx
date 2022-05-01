@@ -7,6 +7,7 @@ import { UserMsg } from './js/apps/mail/cmps/user-msg.jsx'
 import { sentMails } from './js/apps/mail/pages/sent-mail.jsx'
 import { BookApp } from './js/pages/book/BookApp.jsx'
 import { BookDetails } from './js/cmps/book/book-details.jsx'
+import { AppAbout } from './js/cmps/book/book-details.jsx'
 
 const Router = ReactRouterDOM.HashRouter
 const { Route, Switch } = ReactRouterDOM
@@ -24,10 +25,10 @@ export function App() {
                 <Route path="/newEmail" component={AddSendEmail}></Route>
                 <Route path="/notes" component={NotesApp}></Route>
                 <Route path="/email" component={EmailApp}></Route>
+                <Route path="/about" component={AppAbout}></Route>
                 <Route path="/" component={AppHome}></Route>
             </Switch>
         </section>
-
         <UserMsg />
     </Router>
 

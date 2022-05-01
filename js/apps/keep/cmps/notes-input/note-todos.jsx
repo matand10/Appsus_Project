@@ -37,12 +37,11 @@ export class NoteTodos extends React.Component {
     render() {
         const { note } = this.props
         const { todos } = this.state
-        const { label } = note.info
 
         return <section className="note-todos">
             <h1 onBlur={(ev) => this.onChangeText(ev, note)} suppressContentEditableWarning="true"
                 contentEditable="true">{note.title}</h1>
-            <ul className={`todos-list`}>
+            <ul className="todos-list">
                 {todos.map((todo, idx) => <li key={todo.txt} className={todo.doneAt ? 'mark' : ''} onClick={() => this.onMarkTodo(todo)}>
                     {todo.txt}
                     <button onClick={() => this.onDeleteTask(idx, todos)} className="todo-btn" >❌</button>

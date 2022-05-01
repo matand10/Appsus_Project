@@ -84,9 +84,7 @@ export class NotesApp extends React.Component {
         return <section>
             <NoteInput onCreate={this.onCreate} />
             {notes.length === 0 && <h1>Your list is empty</h1>}
-            <hr />
             {notes.length > 0 && <div>
-                {/* <PinnedNotes notes={notes} onDelete={this.onDelete} onPin={this.onPin} onDuplicate={this.onDuplicate} /> */}
                 <NoteList convertNoteToEmail={this.convertNoteToEmail} saveText={this.saveText} notes={notes} onDragNote={this.onDragNote} onDelete={this.onDelete} onPin={this.onPin} onDuplicate={this.onDuplicate} />
             </div>}
         </section>

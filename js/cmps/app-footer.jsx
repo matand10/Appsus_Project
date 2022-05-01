@@ -16,9 +16,9 @@ export function AppFooter() {
         </div>
         <div className="footer-nav">
             <ul className="nav">
-                <li><i class="fab fa-instagram-square"></i></li>
-                <li><i class="fab fa-linkedin"></i></li>
-                <li><i class="fab fa-twitter-square"></i></li>
+                <li><i className="fab fa-instagram-square"></i></li>
+                <li><i className="fab fa-linkedin"></i></li>
+                <li><i className="fab fa-twitter-square"></i></li>
             </ul>
             <ul className="menu">
                 <li><a href="#">Home</a></li>

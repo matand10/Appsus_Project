@@ -1,4 +1,5 @@
 import { noteService } from '../../keep/services/note.service.js'
+import { eventBusService } from '../../../services/event-bus-service.js'
 
 import { NoteText } from '../../keep/cmps/notes-input/note-text.jsx'
 import { NoteImg } from '../../keep/cmps/notes-input/note-img.jsx'
@@ -21,6 +22,9 @@ export class NotePreview extends React.Component {
 
     onDeleteNote = (noteId) => {
         this.props.onDelete(noteId)
+        eventBusService.emit('user-msg', {
+            type: 'success', txt: 'Note deleted'
+        })
     }
 
     setColor = ({ target }) => {
@@ -32,14 +36,21 @@ export class NotePreview extends React.Component {
 
     onPinNote = (noteId) => {
         this.props.onPin(noteId)
+        eventBusService.emit('user-msg', {
+            type: 'success', txt: 'Note pinned!'
+        })
+
     }
 
     onDuplicateNote(noteId) {
         this.props.onDuplicate(noteId)
+        eventBusService.emit('user-msg', {
+            type: 'success', txt: 'Note duplicated successfully!'
+        })
+
     }
 
     addTask = (todos) => {
-        console.log(todos);
     }
 
     dragStarted = (ev, note) => {

@@ -4,27 +4,35 @@
 
 
 /* Basics */
+@import './cmps/app-header.css';
 @import './basics/base.css';
+
+
+
 /* @import './basics/helpers.css'; */
 @import './basics/main-layout.css';
-
 
 
 /* Pages */
 @import './pages/home.css';
 
+
+
 /* Modal */
 @import './pages/modal.css';
 
-/* Components */
-@import './cmps/app-header.css';
+
+
+/* Notes */
 @import './pages//header/search-line.css';
 @import './cmps/note-app/note-preview.css';
 @import './cmps/note-app/note-text.css';
 @import './cmps/note-app/note-todos.css';
 @import './cmps/note-app/note-input.css';
+@import './cmps/note-app/note-input.css';
 
 
+/* Emails */
 @import './cmps/email-app/sort-email.css';
 @import './cmps/email-app/inbox-mail.css';
 @import './cmps/email-app/inbox-mail.css';
