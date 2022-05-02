@@ -27,13 +27,8 @@ export function AppAbout() {
             </div>
             <div className="image-section">
                 <img className="matan-img" src="assets/imgs/about/My pic.jpg" />
-                <img className="yael-img" src="assets/imgs/about/Yael.jpg" />
+                <img className="yael-img" src="assets/imgs/about/yael.jpg" />
             </div>
         </div>
-
-
-
-
-        {/* <AppFooter /> */}
     </section>
 }
