@@ -18,6 +18,7 @@ export const emailService = {
 const USER_KEY = 'userDB'
 let gEmails = storageService.loadFromStorage(USER_KEY)
 
+
 function getMails() {
     return Promise.resolve(gEmails)
 }
@@ -36,7 +37,6 @@ function query(filterBy) {
             return email.subject.toLowerCase().includes(subject.toLowerCase())
         })
     }
-
     return Promise.resolve(gEmails)
 }
 
@@ -57,16 +57,6 @@ function getSort(sortBy) {
     return Promise.resolve(gEmails)
 }
 
-function _createEmails() {
-    _creatEmail('Hells kitchen', 'fdgffgsdgsdsdsdgsd', 'Gordon Ramsey', ['Critical', 'Memories'])
-    _creatEmail('The chef game', 'fdgffgsdgsdsdsdgsd', 'Moshik Rot', ['Family', 'Memories'])
-    _creatEmail('The chef game', 'fdgffgsdgsdsdsdgsd', 'Asaf Granit', ['Work', 'Critical'])
-    _creatEmail('Olive oil', 'fdgffgsdgsdsdsdgsd', 'Chaim Cohen'['Family', 'Friends'])
-    _creatEmail('Chines food', 'fdgffgsdgsdsdsdgsd', 'Aharoni', ['Memories', 'Family'])
-    _creatEmail('Master chef', 'fdgffgsdgsdsdsdgsd', 'Meir Adoni', ['Romantic', 'Family'])
-    _creatEmail('The chef game', 'fdgffgsdgsdsdsdgsd', 'Yosi Shitrit', ['Family', 'Spam'])
-}
-
 function _creatEmail(subject = utilService.makeLorem(10), body = utilService.makeLorem(10), from = 'Muki', lables = ['Spam', 'Friends']) {
     let email = {
         id: utilService.makeId(),
@@ -77,12 +67,6 @@ function _creatEmail(subject = utilService.makeLorem(10), body = utilService.mak
         mail: 'test@text.com',
         to: 'Ori',
         from,
-        // status: {
-        //     inbox,
-        //     sent,
-        //     trash,
-        //     draft
-        // },
         isStared: false,
         isSent: false,
         lables
@@ -100,7 +84,7 @@ function getEmailById(emailId) {
 function updateKey(emailId, key) {
     let emails = storageService.loadFromStorage(USER_KEY)
     let email = emails.find(email => emailId === email.id)
-    email[key] = !email[key] 
+    email[key] = !email[key]
     storageService.saveToStorage(USER_KEY, emails)
     return Promise.resolve(emails)
 }
@@ -122,35 +106,52 @@ function addMail(valSubject, valBody) {
 }
 
 function addNoteToMail(note) {
-    // let emails = storageService.loadFromStorage(USER_KEY)
     let newMail
     switch (note.type) {
         case 'note-txt':
             newMail = _creatEmail(note.title, note.info.txt)
-            // emails.push(newMail)
             break;
         case 'note-img':
             newMail = _creatEmail(note.title, note.info.img)
-            // emails.push(newMail)
             break;
         case 'note-todos':
             newMail = _creatEmail(note.title, note.info.todos)
-            // emails.push(newMail)
             break;
         case 'note-video':
             newMail = _creatEmail(note.title, note.info.video)
-            // emails.push(newMail)
             break
     }
-    // storageService.saveToStorage(USER_KEY, emails)
     return Promise.resolve(newMail)
 }
 
 function deleteEmail(emailId) {
     let emails = storageService.loadFromStorage(USER_KEY)
     let emailIdx = emails.findIndex(email => emailId === email.id)
-    // console.log(email)
     emails.splice(emailIdx, 1)
     storageService.saveToStorage(USER_KEY, emails)
     return Promise.resolve(emails)
+}
+
+function _createEmails() {
+    _creatEmail('Hells kitchen', utilService.makeLorem(10), 'Gordon Ramsey', ['Critical', 'Memories'])
+    _creatEmail(utilService.makeLorem(2), utilService.makeLorem(10), 'Moshik Rot', ['Family', 'Memories'])
+    _creatEmail('The chef game', utilService.makeLorem(10), 'Asaf Granit', ['Work', 'Critical'])
+    _creatEmail('Olive oil', utilService.makeLorem(10), 'Chaim Cohen'['Family', 'Friends'])
+    _creatEmail('Chines food', utilService.makeLorem(10), 'Aharoni', ['Memories', 'Family'])
+    _creatEmail('Master chef', utilService.makeLorem(10), 'Meir Adoni', ['Romantic', 'Family'])
+    _creatEmail('The chef game', utilService.makeLorem(10), 'Yosi Shitrit', ['Family', 'Spam'])
+    _creatEmail(utilService.makeLorem(2), utilService.makeLorem(10), 'Avi Cohen', ['Family', 'Spam'])
+    _creatEmail(utilService.makeLorem(2), utilService.makeLorem(10), 'Niall Church', ['Family', 'Spam'])
+    _creatEmail(utilService.makeLorem(2), utilService.makeLorem(10), 'Imran Rosa', ['Family', 'Spam'])
+    _creatEmail(utilService.makeLorem(2), utilService.makeLorem(10), 'Teddie Holman', ['Romantic', 'Spam'])
+    _creatEmail(utilService.makeLorem(2), utilService.makeLorem(10), 'Tamera Carney', ['Family', 'Spam'])
+    _creatEmail(utilService.makeLorem(2), utilService.makeLorem(10), 'Orlaith Rankin', ['Family', 'Spam'])
+    _creatEmail(utilService.makeLorem(2), utilService.makeLorem(10), 'Aleisha Blair', ['Family', 'Spam'])
+    _creatEmail(utilService.makeLorem(2), utilService.makeLorem(10), 'Matt Meyers', ['Family', 'Memories'])
+    _creatEmail(utilService.makeLorem(2), utilService.makeLorem(10), 'Nadeem Naylor', ['Family', 'Spam'])
+    _creatEmail(utilService.makeLorem(2), utilService.makeLorem(10), 'Inayah Mitchell', ['Family', 'Spam'])
+    _creatEmail(utilService.makeLorem(2), utilService.makeLorem(10), 'Cynthia Perez', ['Memories', 'Spam'])
+    _creatEmail(utilService.makeLorem(2), utilService.makeLorem(10), 'Stefanie Cummings', ['Family', 'Critical'])
+    _creatEmail(utilService.makeLorem(2), utilService.makeLorem(10), 'Amelia Alfaro', ['Romantic', 'Spam'])
+    _creatEmail(utilService.makeLorem(2), utilService.makeLorem(10), 'Krishan Enriquez', ['Work', 'Spam'])
 }

@@ -117,10 +117,10 @@ export class NoteInput extends React.Component {
                     </div>
                     {isInputClicked && <div className="input-container imgs">
                         <label htmlFor="create-note" className="input-btn">
-                            <img className={isSelected === 'txt' ? 'txt' : ''} onClick={(ev) => this.onChangeType(ev, 1)} src="assets/imgs/notes-input-imgs/text.svg" />
-                            <img className={isSelected === 'img' ? 'img' : ''} onClick={(ev) => this.onChangeType(ev, 2)} src="assets/imgs/notes-input-imgs/image.svg" />
-                            <img className={isSelected === 'todos' ? 'todos' : ''} onClick={(ev) => this.onChangeType(ev, 3)} src="assets/imgs/notes-input-imgs/list.svg" />
-                            <img className={isSelected === 'video' ? 'video' : ''} onClick={(ev) => this.onChangeType(ev, 4)} src="assets/imgs/notes-input-imgs/video.svg" />
+                            <img title="Text" className={isSelected === 'txt' ? 'txt' : ''} onClick={(ev) => this.onChangeType(ev, 1)} src="assets/imgs/notes-input-imgs/text.svg" />
+                            <img title="Img" className={isSelected === 'img' ? 'img' : ''} onClick={(ev) => this.onChangeType(ev, 2)} src="assets/imgs/notes-input-imgs/image.svg" />
+                            <img title="Todo" className={isSelected === 'todos' ? 'todos' : ''} onClick={(ev) => this.onChangeType(ev, 3)} src="assets/imgs/notes-input-imgs/list.svg" />
+                            <img title="Video" className={isSelected === 'video' ? 'video' : ''} onClick={(ev) => this.onChangeType(ev, 4)} src="assets/imgs/notes-input-imgs/video.svg" />
                         </label>
                     </div>}
                     <button hidden>Close</button>
