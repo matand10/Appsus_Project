@@ -3,6 +3,9 @@ const { NavLink, withRouter } = ReactRouterDOM
 
 function _Home() {
     return <section className="home">
+        <div className="home-logo">
+            <img src="assets/imgs/home/Home logo.png" />
+        </div>
         <div className="home-apps">
             <NavLink to="/email"><img src="assets/imgs/home/email.svg" /></NavLink>
             <NavLink to="/notes"><img src="assets/imgs/home/Google-keep.svg" /></NavLink>

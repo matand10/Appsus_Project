@@ -1,6 +1,7 @@
 .home {
-    height: 31.25em;
+    height: 15.25em;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -53,6 +54,17 @@
 
 .dots-menu:hover {
     opacity: 0.8;
+}
+
+.home-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+}
+
+.home-logo img {
+    width: 300px;
 }
 
 @media (max-width: 500px) {
